@@ -27,6 +27,35 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="/js/ajax-form.js"></script>
+    <script src="/js/waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/scrollIt.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/nice-select.min.js"></script>
+    <script src="/js/jquery.slicknav.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/gijgo.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+
+    <!--contact j/s-->
+    <script src="/js/contact.js"></script>
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/js/jquery.form.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/mail-script.js"></script>
+
+    <script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -79,7 +108,7 @@
                                     <a href="#"> <i class="fa fa-phone"></i> +10 673 567 367</a>
                                 </div>
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn4" href="{{ route('login') }}">Login</a>
+                                    <a class="boxed-btn4" data-toggle="modal" data-target="#LoginModal" href="#">Login</a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +123,35 @@
     </div>
 </header>
 <!-- header-end -->
-
+<div class="modal fade" id="LoginModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="LoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="box-shadow: 0px 50px 90px 0 rgba(0, 0, 0, 0.2), 0px 0px 80px 90px rgba(0, 0, 0, 0.4);">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LoginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div>
+                        <label for="">Email</label>
+                        <input type="email" name="email" placeholder="Input Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Email'" required class="single-input">
+                    </div>
+                    <div class="mt-10">
+                        <label for="">Password</label>
+                        <input type="password" name="password" placeholder="Input Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input Password'" required class="single-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="genric-btn danger radius" data-dismiss="modal">Close</button>
+                    <button class="genric-btn success radius" type="submit">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- slider_area_start -->
 <div class="slider_area">
     <div class="single_slider  d-flex align-items-center slider_bg_1">
@@ -604,35 +661,6 @@
 <!--/ footer end  -->
 
 <!-- link that opens popup -->
-<!-- JS here -->
-<script src="/js/vendor/modernizr-3.5.0.min.js"></script>
-<script src="/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/isotope.pkgd.min.js"></script>
-<script src="/js/ajax-form.js"></script>
-<script src="/js/waypoints.min.js"></script>
-<script src="/js/jquery.counterup.min.js"></script>
-<script src="/js/imagesloaded.pkgd.min.js"></script>
-<script src="/js/scrollIt.js"></script>
-<script src="/js/jquery.scrollUp.min.js"></script>
-<script src="/js/wow.min.js"></script>
-<script src="/js/nice-select.min.js"></script>
-<script src="/js/jquery.slicknav.min.js"></script>
-<script src="/js/jquery.magnific-popup.min.js"></script>
-<script src="/js/plugins.js"></script>
-<script src="/js/gijgo.min.js"></script>
-<script src="/js/slick.min.js"></script>
-
-<!--contact j/s-->
-<script src="/js/contact.js"></script>
-<script src="/js/jquery.ajaxchimp.min.js"></script>
-<script src="/js/jquery.form.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
-<script src="/js/mail-script.js"></script>
-
-<script src="/js/main.js"></script>
 </body>
 
 </html>
