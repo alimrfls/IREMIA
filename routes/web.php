@@ -30,6 +30,7 @@ Route::post('/pendaftaranPemakaman','PemakamanController@regisPemakaman');
 Route::get('/pendaftaranPemakaman',function (){
     return view('Pemakaman.registerpic');
 });
+
 Route::get('/pemakaman','PemakamanController@ShowPemakaman');
 //==========================================================================
 

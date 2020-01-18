@@ -27,6 +27,16 @@ class UserController extends Controller
 
     public function index()
     {
+        if(Auth::user()){
+            $role = Auth::user()->role;
+            if($role == "admin_dinas"){
+                return view('home');
+            }elseif ($role == "admin_tpu"){
+                return view('home');
+            }else{
+                return view('welcome');
+            }
+        }
         return view('welcome');
     }
 
