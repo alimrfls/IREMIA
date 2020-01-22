@@ -20,9 +20,9 @@ class UsersTableSeeder extends Seeder
                 'address' => 'jl taman harapan baru',
                 'gender' => 'male',
                 'role' => 'admin_dinas',
-                'KepalaPemakaman' => 'null',
-                'NIPKepalaPemakaman' => 'null',
-                'pemakaman_id' => 'null'
+                'kepala_pemakaman' => null,
+                'NIP_kepala_pemakaman' => null,
+                'pemakaman_id' => null
             ],
             [
                 'fullname' => 'yudha',
@@ -31,8 +31,8 @@ class UsersTableSeeder extends Seeder
                 'address' => 'jl taman harapan baru33',
                 'gender' => 'male',
                 'role' => 'admin_tpu',
-                'KepalaPemakaman' => 'Saimin',
-                'NIPKepalaPemakaman' => '1233412341232',
+                'kepala_pemakaman' => 'Saimin',
+                'NIP_kepala_pemakaman' => '1233412341232',
                 'pemakaman_id' => '1'
             ],
             [
@@ -42,9 +42,9 @@ class UsersTableSeeder extends Seeder
                 'address' => 'Jln. H Rijin Depok',
                 'gender' => 'male',
                 'role' => 'member',
-                'KepalaPemakaman' => 'null',
-                'NIPKepalaPemakaman' => 'null',
-                'pemakaman_id' => 'null'
+                'kepala_pemakaman' => null,
+                'NIP_kepala_pemakaman' => null,
+                'pemakaman_id' => null
             ]
         ]);
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\IPTMPerpanjangan;
-use App\makamTumpangan;
+use App\Perpanjangan;
+use App\Tumpangan;
 use App\Pemakaman;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -80,18 +80,18 @@ class PemakamanController extends Controller
     }
 
     public function ShowPemakaman(){
-        $pemakaman = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
+        $pemakaman = DB::table('pemakaman','users')
+            ->join('users','pemakaman.id','=','users.pemakaman_id')
             ->where('users.id','=',Auth::user()->id)
             -> get();
-        $makam =DB::table('Pemakaman','makams')
-            -> join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
+        $makam =DB::table('pemakaman','makam')
+            -> join('makam','pemakaman.id','=','makam.pemakaman_id')
             ->get();
-        $users = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
+        $users = DB::table('pemakaman','users')
+            ->join('users','pemakaman.id','=','users.pemakaman_id')
             ->get();
        // print_r($Pemakaman);
-        return view('Pemakaman.lihat_detail')->with([
+        return view('pemakaman.lihat_detail')->with([
             "pemakamanumum" => $pemakaman,
             "makams"=>$makam,
             "picpemakaman"=>$users
@@ -162,7 +162,7 @@ class PemakamanController extends Controller
         $file = $request->file('photo_makam3');
         $file->move(public_path('/images/makamtumpangan'), $file->getClientOriginalName());
 
-        $makam_tumpangan = new makamTumpangan();
+        $makam_tumpangan = new Tumpangan();
         $makam_tumpangan->nama_Almarhum = $request['nama_Almarhum'];
         $makam_tumpangan->tanggal_Wafat = $request['tanggal_Wafat'];
         $makam_tumpangan->lokasi_Pemakaman = $request['lokasi_Pemakaman'];

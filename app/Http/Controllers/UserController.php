@@ -29,12 +29,10 @@ class UserController extends Controller
     {
         if(Auth::user()){
             $role = Auth::user()->role;
-            if($role == "admin_dinas"){
-                return view('home');
-            }elseif ($role == "admin_tpu"){
-                return view('home');
-            }else{
+            if($role == "member"){
                 return view('welcome');
+            }else{
+                return view('home');
             }
         }
         return view('welcome');

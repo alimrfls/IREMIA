@@ -14,17 +14,17 @@ class CreatePemakamanTable extends Migration
     public function up()
     {
         Schema::create('pemakaman', function (Blueprint $table) {
-            $table->increments('pemakamanid');
-            $table->string('namaPemakaman');
-            $table->string('alamatPemakaman');
-            $table->string('kotaPemakaman');
-            $table->string('provinsiPemakaman');
-            $table->string('kodeposPemakaman');
-            $table->string('emailPemakaman');
-            $table->string('jumlahPemakaman');
-            $table->string('luasPemakaman');
-            $table->string('deskripsiPemakaman');
-            $table->string('photoPemakaman');
+            $table->increments('id');
+            $table->string('nama_pemakaman');
+            $table->string('alamat_pemakaman');
+            $table->string('kota_pemakaman');
+            $table->string('provinsi_pemakaman');
+            $table->string('kodepos_pemakaman');
+            $table->string('email_pemakaman');
+            $table->string('jumlah_pemakaman');
+            $table->string('luas_pemakaman');
+            $table->string('deskripsi_pemakaman');
+            $table->string('photo_pemakaman');
             $table->timestamps();
         });
     }

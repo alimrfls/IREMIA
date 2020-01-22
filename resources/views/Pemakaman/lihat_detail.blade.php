@@ -59,11 +59,11 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class=" tab-pane container" id="information_pemakaman" role="tabpanel" aria-labelledby="information">
                     <h1 style="font-family: 'Comic Sans MS'">
-                        {{$tpu->namaPemakaman}}
+                        {{$tpu->nama_pemakaman}}
                     </h1>
                     <div class="row" style="padding-top: 50px">
                         <div class="col-md-6">
-                            <img src="/images/pemakaman/{{$tpu->photoPemakaman}}" alt="">
+                            <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" alt="">
                         </div>
                         <div class="col-md-6">
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -87,7 +87,7 @@
                                                         <label class=" form-control-label">Nama pemakaman</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->namaPemakaman}}</p>
+                                                        <p>{{$tpu->nama_pemakaman}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -95,7 +95,7 @@
                                                         <label for="text-input" class=" form-control-label">Alamat Pemakaman</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->alamatPemakaman}},{{$tpu->kotaPemakaman}},{{$tpu->provinsiPemakaman}},{{$tpu->kodeposPemakaman}}</p>
+                                                        <p>{{$tpu->alamat_pemakaman}},{{$tpu->kota_pemakaman}},{{$tpu->provinsi_pemakaman}},{{$tpu->kodepos_pemakaman}}</p>
                                                     </div>
 
                                                 </div>
@@ -104,7 +104,7 @@
                                                         <label for="textearea-input" class=" form-control-label">Email Pemakaman</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->emailPemakaman}}</p>
+                                                        <p>{{$tpu->email_pemakaman}}</p>
                                                     </div>
 
                                                 </div>
@@ -113,7 +113,7 @@
                                                         <label for="textearea-input" class=" form-control-label">Jumlah Pemakaman :</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->jumlahPemakaman}}</p>
+                                                        <p>{{$tpu->jumlah_pemakaman}}</p>
                                                     </div>
 
                                                 </div>
@@ -122,7 +122,7 @@
                                                         <label for="text-input" class=" form-control-label">Luas Pemakaman</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->luasPemakaman}}</p>
+                                                        <p>{{$tpu->luas_pemakaman}}</p>
                                                     </div>
 
                                                 </div>
@@ -131,7 +131,7 @@
                                                         <label for="text-input" class=" form-control-label">Deskripsi Pemakaman</label>
                                                     </div>
                                                     <div class="col col-md-6">
-                                                        <p>{{$tpu->deskripsiPemakaman}}</p>
+                                                        <p>{{$tpu->deskripsi_pemakaman}}</p>
                                                     </div>
 
                                                 </div>
@@ -141,10 +141,10 @@
                                     </div>
                                     <div class="row"style="margin-top: 15px;padding-left: 50px">
                                         <div class="col-md-3">
-                                            <a href="/ijin_perpanjangan/{{$tpu->pemakamanid}}" class="btn btn-primary" type="button" style="float: right" >Perpanjangan Izin</a>
+                                            <a href="/ijin_perpanjangan/{{$tpu->id}}" class="btn btn-primary" type="button" style="float: right" >Perpanjangan Izin</a>
                                         </div>
                                         <div class="col-md-3">
-                                            <a href="/ijin_tumpangan/{{$tpu->pemakamanid}}" class="btn btn-primary" type="button" >Pemesanan Makam Tumpangan</a>
+                                            <a href="/ijin_tumpangan/{{$tpu->id}}" class="btn btn-primary" type="button" >Pemesanan Makam Tumpangan</a>
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                                                     </div>
                                                     <br>
                                                     <div class="col col-md-3">
-                                                        <p>{{$pic->NIPKepalaPemakaman}}</p>
+                                                        <p>{{$pic->NIP_kepala_pemakaman}}</p>
                                                     </div>
                                                 </div>
                                             </form>

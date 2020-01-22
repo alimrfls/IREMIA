@@ -24,6 +24,34 @@ Route::get('/dashboard',    function(){
 //==========================================================================
 
 
+
+//All IPTM
+Route::get('/IPTM/{inputType}/sukses/{id}','IPTMController@ShowSuksesInput');
+Route::get('/IPTM/{inputType}/cetak/{id}','IPTMController@PrintIPTM');
+
+//IPTM Perpanjangan
+
+Route::get('/IPTM/perpanjangan','PerpanjanganController@ShowFormPerpanjanganBaru');
+Route::post('/IPTM/perpanjangan/submit','PerpanjanganController@SubmitPerpanjangan');
+Route::get('/IPTM/perpanjangan/{id}','PerpanjanganController@ShowFormPerpanjangan');
+//Route::get('/IPTM/perpanjangan/cetak/{id}', 'PerpanjanganController@PrintIPTMPerpanjangan');
+
+
+//IPTM Tumpangan
+
+Route::get('/IPTM/tumpangan','TumpanganController@ShowFormTumpanganBaru');
+Route::get('/IPTM/tumpangan/{id}','TumpanganController@ShowFormTumpangan');
+Route::post('/IPTM/tumpangan/submit','TumpanganController@SubmitTumpangan');
+
+Route::post('/insertTumpangan','PemakamanController@insertMakamTumpangan');
+Route::get('/izinTumpangan',function (){
+    return view('Tumpangan.insert_tumpangan');
+});
+
+
+Route::get('/IPTM/tumpangan/cetak/{id}', 'TumpanganController@PrintIPTMPerpanjangan');
+
+
 //routes regis Pemakaman
 //==========================================================================
 Route::post('/pendaftaranPemakaman','PemakamanController@regisPemakaman');
@@ -38,7 +66,7 @@ Route::get('/pemakaman','PemakamanController@ShowPemakaman');
 //add makam sesuai tpu
 //button insert di lihat Pemakaman
 //==========================================================================
-Route::post('/insertTumpangan','PemakamanController@insertMakamTumpangan');
+
 Route::get('/daftarMakam',function(){
     return view('Makam.insert_datamakam');
 });
@@ -48,25 +76,20 @@ Route::get('/daftarMakam',function(){
 //lihat Makam
 //==========================================================================
 Route::get('/lihatMakam/{id}','PemakamanController@ShowMakam');
-Route::get('/izinTumpangan',function (){
-    return view('Tumpangan.insert_tumpangan');
-});
+
 //==========================================================================
 
 
 //ijin tumpangan
 //==========================================================================
-Route::get('/formTumpangan/{id}','IPTMController@ShowFormTumpangan');
-Route::post('/izinTumpangan/{id}','IPTMController@izinTumpangan');
+
 Route::get('/viewSukses/{id}','IPTMController@ShowSuksesInput');
 //==========================================================================
 
 
 // ijin perpanjangan
 //=============================================================================================
-Route::get('/formPerpanjangan/{id}','IPTMController@ShowFormPerpanjangan');
-Route::post('/izinPerpanjangan','IPTMController@izinPerpanjangan');
-Route::get('/view-sukses_perpanjangan/{id}','IPTMController@ShowSuksesInputPerpanjangan');
+
 //=============================================================================================
 
 
@@ -79,12 +102,14 @@ Route::get('/pemakaman/{id}','PemakamanController@ShowDetailPemakamanByUser');
 
 //Cetak By Admin
 //=======================================================
-Route::get('/IPTM/perpanjangan','IPTMController@showFormCetakPerpanjangan');
-Route::get('/IPTM/tumpangan','IPTMController@showFormCetakTumpangan');
-Route::get('/IPTM/pemindahan','IPTMController@showFormCetakPemindahan');
+
+
+Route::get('/IPTM/pemindahan','PemindahanController@showFormCetakPemindahan');
 Route::get('/IPTM/riwayat','IPTMController@ShowRiwayatCetakIPTM');
 
-Route::get('/print_iptm_perpanjangan/{id}', 'IPTMController@PrintIPTMPerpanjangan');
+
+
+Route::get('/IPTM/pemindahan/cetak/{id}', 'PemindahanController@PrintIPTMPerpanjangan');
 
 //=======================================================
 
