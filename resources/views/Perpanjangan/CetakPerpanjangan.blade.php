@@ -16,7 +16,7 @@
                     <div class="col-md-12">
                         <form action="/IPTM/perpanjangan/submit" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <h2> Perpanjangan Ijin Pada Pemakaman {{$pemakamanName->namaPemakaman}}</h2>
+                            <h2> Perpanjangan Izin Pada Pemakaman {{$pemakamanName->nama_pemakaman}}</h2>
                             <hr style="border: solid">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -191,7 +191,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <input type="text" id="operation_type" name="operation_type" value="cetak_iptm_perpanjangan" hidden>
-                                            <input type="text" id="id_pemakaman" name="id_pemakaman" value="{{$pemakamanName->pemakamanid}}" hidden>
+                                            <input type="text" id="id_pemakaman" name="id_pemakaman" value="{{$pemakamanName->id}}" hidden>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
                                             <button type="submit" class="btn btn-primary">Ya, Cetak</button>
                                         </div>

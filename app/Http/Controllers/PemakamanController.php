@@ -100,12 +100,12 @@ class PemakamanController extends Controller
     }
 
     public function ShowMakam($id){
-        $makams = DB::table('makams','Pemakaman')
-            ->join('Pemakaman','makams.pemakaman_id','=','Pemakaman.pemakamanid')
-            ->where('Pemakaman.pemakamanid','=',$id)
+        $makams = DB::table('makam','Pemakaman')
+            ->join('Pemakaman','makam.pemakaman_id','=','Pemakaman.id')
+            ->where('Pemakaman.id','=',$id)
             ->get();
-        $makamtumpangan =DB::table('Pemakaman','makams')
-            -> join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
+        $makamtumpangan =DB::table('Pemakaman','makam')
+            -> join('makam','Pemakaman.id','=','makam.pemakaman_id')
             ->get();
         return view ('Makam.show_Makam')->with([
             "listmakam"=>$makams,
@@ -115,13 +115,13 @@ class PemakamanController extends Controller
 
     public function ShowDetailPemakamanByUser($pemakamanid){
         $pemakamandetail = DB::table('Pemakaman')
-            ->where('Pemakaman.pemakamanid','=',$pemakamanid)
+            ->where('Pemakaman.id','=',$pemakamanid)
             ->get();
-        $makamtumpangan = DB::table('Pemakaman','makams')
-            ->join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
+        $makamtumpangan = DB::table('Pemakaman','makam')
+            ->join('makam','Pemakaman.id','=','makam.pemakaman_id')
             ->get();
         $users = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
+            ->join('users','Pemakaman.id','=','users.pemakaman_id')
             ->get();
         return view('Pemakaman.lihat_detailByUser')->with([
             "detailpemakaman"=>$pemakamandetail,

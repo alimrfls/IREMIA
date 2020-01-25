@@ -43,37 +43,22 @@
         }
     </style>
     @if(Auth::check())
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Informasi Pemakaman</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Lihat Peraturan</a>
-            </li>
-        </ul>
 
-
-    @if(count($pemakamanumum  )>0)
-    @foreach($pemakamanumum as $tpu)
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        @if(count($pemakamanumum)>0)
+            @foreach($pemakamanumum as $tpu)
                 <div class=" tab-pane container" id="information_pemakaman" role="tabpanel" aria-labelledby="information">
-                    <h1 style="font-family: 'Comic Sans MS'">
+                    <h1 style="padding-top: 15px; padding-bottom: 20px">
                         {{$tpu->nama_pemakaman}}
                     </h1>
-                    <div class="row" style="padding-top: 50px">
+                    <div class="row">
                         <div class="col-md-6">
-                            <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" alt="">
+                            @if($tpu->photo_pemakaman != "")
+                                <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" width="100%" alt="">
+                            @else
+                                <img src="/images/no-image-available.jpg" width="100%" alt="">
+                            @endif
                         </div>
                         <div class="col-md-6">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-detaik-tab" data-toggle="pill" href="#pills-information" role="tab" aria-controls="pills-detail" aria-selected="true">Informasi </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-penanggungjawab-tab" data-toggle="pill" href="#pills-penanggungjawab" role="tab" aria-controls="pills-penanggungjawab" aria-selected="false">Penanggung jawab </a>
-                                </li>
-                            </ul>
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-information" role="tabpanel" aria-labelledby="pills-detaik-tab">
                                     <div class=" tab-pane container" id="detail_pemakaman" role="tabpanel" aria-labelledby="alldetail">
@@ -82,6 +67,18 @@
                                         </div>
                                         <div class="card-body card-block">
                                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                <div class="row form-group">
+                                                    <div class="col col-md-6">
+                                                        <label for="text-input" class=" form-control-label">Nama Penanggung Jawab</label>
+                                                    </div>
+                                                    <div class="col col-md-6">
+                                                        @if(count($picpemakaman)>0)
+                                                            @foreach($picpemakaman as $pic)
+                                                                <p>{{$pic->fullname}} <br>NIP: {{$pic->NIP_kepala_pemakaman}}</p>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
                                                 <div class="row form-group">
                                                     <div class="col col-md-6">
                                                         <label class=" form-control-label">Nama pemakaman</label>
@@ -124,7 +121,6 @@
                                                     <div class="col col-md-6">
                                                         <p>{{$tpu->luas_pemakaman}}</p>
                                                     </div>
-
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col col-md-6">
@@ -133,63 +129,27 @@
                                                     <div class="col col-md-6">
                                                         <p>{{$tpu->deskripsi_pemakaman}}</p>
                                                     </div>
-
                                                 </div>
                                             </form>
                                         </div>
-
-                                    </div>
-                                    <div class="row"style="margin-top: 15px;padding-left: 50px">
-                                        <div class="col-md-3">
-                                            <a href="/ijin_perpanjangan/{{$tpu->id}}" class="btn btn-primary" type="button" style="float: right" >Perpanjangan Izin</a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a href="/ijin_tumpangan/{{$tpu->id}}" class="btn btn-primary" type="button" >Pemesanan Makam Tumpangan</a>
-                                        </div>
                                     </div>
                                 </div>
-
-                                @if(count($picpemakaman)>0)
-                                    @foreach($picpemakaman as $pic)
-                                <div class="tab-pane fade" id="pills-penanggungjawab" role="tabpanel" aria-labelledby="pills-penanggungjawab-tab">
-                                    <div class=" tab-pane container" id="penanggung_jawab" role="tabpanel" aria-labelledby="penanggung">
-                                        <div class="card-header">
-                                            <strong>PENANGGUNG JAWAB</strong>
-                                        </div>
-                                        <div class="card-body card-block">
-                                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label class=" form-control-label">Nama Penanggung Jawab</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="col col-md-3">
-                                                        <p>{{$pic->NIP_kepala_pemakaman}}</p>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                     </div>
-                                </div>
-                                    @endforeach
-                                    @endif
                             </div>
+                            <div class="text-right" style="margin-top: 15px;">
+                                <a href="/IPTM/perpanjangan">
+                                    <button class="btn btn-info" type="button" >Jadwal Pemakaman</button>
+                                </a>
 
+                                <a href="/IPTM/tumpangan">
+                                    <button class="btn btn-primary" type="button" >Edit Informasi</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <br>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div class=" tab-pane container" id="lihat_peraturan" role="tabpanel" aria-labelledby="peraturan">
-                    bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-                </div>
-            </div>
-        </div>
-
-    @endforeach
-    @endif
+            @endforeach
+        @endif
     @else
         <h2>please Login First</h2>
     @endif

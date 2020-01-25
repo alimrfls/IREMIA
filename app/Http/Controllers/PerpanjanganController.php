@@ -118,7 +118,7 @@ class PerpanjanganController extends Controller
 
     public function ShowFormPerpanjanganBaru(){
         $cetakPemakamanName = DB::table('pemakaman','users')
-            ->join('users','pemakaman.pemakamanid','=','users.pemakaman_id')
+            ->join('users','pemakaman.id','=','users.pemakaman_id')
             ->where('users.id','=',Auth::user()->id)
             ->get();
         return view('Perpanjangan.CetakPerpanjangan')->with([

@@ -115,8 +115,8 @@ class TumpanganController extends Controller
 
     public function ShowFormTumpangan($pemakamanid)
     {
-        $pemakamans = DB::table('Pemakaman')
-            ->where('Pemakaman.pemakamanid', '=', $pemakamanid)
+        $pemakamans = DB::table('pemakaman')
+            ->where('pemakaman.id', '=', $pemakamanid)
             ->get();
         return view('Tumpangan.insert_tumpangan')->with([
             "pemakamanname" => $pemakamans,
@@ -125,7 +125,7 @@ class TumpanganController extends Controller
 
     public function ShowFormTumpanganBaru(){
         $cetakPemakamanName = DB::table('pemakaman','users')
-            ->join('users','pemakaman.pemakamanid','=','users.pemakaman_id')
+            ->join('users','pemakaman.id','=','users.pemakaman_id')
             ->where('users.id','=',Auth::user()->id)
             ->get();
 

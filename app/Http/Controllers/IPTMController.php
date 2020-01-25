@@ -65,4 +65,8 @@ class IPTMController extends Controller
         ]);
     }
 
+    public function ShowRiwayatCetakIPTM(){
+        return view('IPTM.riwayat-cetak');
+    }
+
 }

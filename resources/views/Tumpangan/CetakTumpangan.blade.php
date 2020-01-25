@@ -14,9 +14,9 @@
                 @if(count($cetakPemakamanName)>0)
                     @foreach($cetakPemakamanName as $pemakamanName)
                         <div class="col-md-12">
-                            <form action="/form_perpanjangan/{{$pemakamanName->pemakamanid}}" method="POST" enctype="multipart/form-data">
+                            <form action="/IPTM/tumpangan/submit" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <h2> Ijin Tumpangan Pada Pemakaman {{$pemakamanName->namaPemakaman}}</h2>
+                                <h2> Izin Tumpangan Pada Pemakaman {{$pemakamanName->nama_pemakaman}}</h2>
                                 <hr style="border: solid">
                                 <div class="col-md-6">
                                     <div class="form-group">
