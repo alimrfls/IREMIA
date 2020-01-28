@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IPTM;
 use App\User;
 use App\Tumpangan;
 use App\Pemindahan;
@@ -41,22 +42,33 @@ class IPTMController extends Controller
 
     }
 
-
     public function PrintIPTM($inputType, $id){
 
         $output = null;
 
         if ($inputType == "perpanjangan")
         {
-            $output = Perpanjangan::find($id);
+            $output = DB::table("perpanjangan")->where("perpanjangan.id", "=", $id)
+                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
         else if($inputType == "pemindahan")
         {
-            $output = Pemindahan::find($id);
+            $output = DB::table("pemindahan")->where("pemindahan.id", "=", $id)
+                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
         else if($inputType == "tumpangan")
         {
-            $output = Tumpangan::find($id);
+            $output = DB::table("tumpangan")->where("tumpangan.id", "=", $id)
+                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
 
         return view('printIPTM')->with([
@@ -69,4 +81,33 @@ class IPTMController extends Controller
         return view('IPTM.riwayat-cetak');
     }
 
+    public function ShowMakamKadaluarsa(){
+        $makam = IPTM::all()->where("masa_berlaku", "<", now());
+
+        return view("Makam.makam-kadaluarsa")->with([
+            "makamCol" => $makam,
+        ]);
+    }
+
+
+    //JSON
+    public function RequestGetIPTM(Request $req){
+        $noIptm = "";
+        $namaAlmarum = "";
+        if($req->query('noiptm')){
+            $noIptm = $req->query('noiptm');
+        }elseif ($req->query('namaAlmarhum')){
+            $namaAlmarum = $req->query('namaAlmarhum');
+        }
+
+        $iptm = DB::table("iptm")
+            ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+            ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+            ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
+            ->where('iptm.nomor_iptm', "=", $noIptm)
+            ->orWhere('almarhum.nama_almarhum', "=", $namaAlmarum)
+            ->get();
+
+        return json_encode($iptm);
+    }
 }

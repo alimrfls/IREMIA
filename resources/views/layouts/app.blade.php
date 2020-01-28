@@ -162,11 +162,13 @@
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+<script src="/vendors/jquery/dist/jquery.js"></script>
 <script src="/vendors/jquery/dist/jquery.min.js"></script>
 <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
 <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/vendors/bootstrap/dist/js/bootstrap.js"></script>
 
-<script src="/vendors/chart.js/dist/Chart.bundle.min.js"></script>
+{{--<script src="/vendors/chart.js/dist/Chart.bundle.min.js"></script>--}}
 <script src="/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
 <script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
 <script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
@@ -176,14 +178,13 @@
 <script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
 <script src="/assets/js/init-scripts/data-table/datatables-init.js"></script>
-<script src="/assets/js/init-scripts/chart-js/chartjs-init.js"></script>
-
+{{--<script src="/assets/js/init-scripts/chart-js/chartjs-init.js"></script>--}}
+<script src="/assets/js/main.js"></script>
 
 @yield('script')
 
-<script src="/assets/js/main.js"></script>
-<script src="/assets/js/dashboard.js"></script>
-<script src="/assets/js/widgets.js"></script>
+{{--<script src="/assets/js/dashboard.js"></script>--}}
+{{--<script src="/assets/js/widgets.js"></script>--}}
 
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IPTM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,35 +18,18 @@ class PerpanjanganController extends Controller
     public function SubmitPerpanjangan(Request $request)
     {
         $operation_type = $request['operation_type'];
-        $id = $request['id_pemakaman'];
+        $id = $request['iptm_id'];
 
         $user = auth()->user();
 
         $rules = [
-            'NoKtp_ahliwaris' => 'required',
-            'nomorIPTM' => 'required',
-            'tanggalIPTM' => 'required',
-            'Nomor_surat_kehilangan' => 'required',
-            'Tanggal_surat_kehilangan' => 'required',
-            'Nama_Ahliwaris' => 'required',
-            'AlamatAhliwaris' => 'required',
-            'RTAhliwaris' => 'required',
-            'RWAhliwaris' => 'required',
-            'KelurahanAhliwaris' => 'required',
-            'KecamatanAhliwaris' => 'required',
-            'KotaAhliwaris' => 'required',
-            'PhoneAhliwaris' => 'required',
-            'HubunganAhliwaris' => 'required',
-            'LokasiTPU' => 'required',
-            'NamaAlmarhum' => 'required',
-            'tanggalwafat' => 'required',
-            'Blok' => 'required',
-            'Blad' => 'required',
-            'Petak' => 'required',
-            'Masa_berlaku' => 'required',
+            'nomor_iptm' => 'required',
+            'perpanjang_hingga' => 'required',
         ];
+
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
+
             if($user->role == "admin_tpu")
             {
                 return redirect('/IPTM/perpanjangan')->withErrors($validator)->withInput();
@@ -55,30 +39,10 @@ class PerpanjanganController extends Controller
                 return redirect('/IPTM/perpanjangan/' . $id)->withErrors($validator)->withInput();
             }
         }
-        $iptm_perpanjangan = new Perpanjangan();
-        $iptm_perpanjangan->nomor_ktp_ahliwaris = $request['NoKtp_ahliwaris'];
-        $iptm_perpanjangan->nomor_iptm = $request['nomorIPTM'];
-        $iptm_perpanjangan->tanggal_iptm = $request['tanggalIPTM'];
-        $iptm_perpanjangan->nomor_surat_kehilangan = $request['Nomor_surat_kehilangan'];
-        $iptm_perpanjangan->tanggal_surat_kehilangan = $request['Tanggal_surat_kehilangan'];
-        $iptm_perpanjangan->nama_ahliwaris = $request['Nama_Ahliwaris'];
-        $iptm_perpanjangan->alamat_ahliwaris = $request['AlamatAhliwaris'];
-        $iptm_perpanjangan->rt_ahliwaris = $request['RTAhliwaris'];
-        $iptm_perpanjangan->rw_ahliwaris = $request['RWAhliwaris'];
-        $iptm_perpanjangan->kelurahan_ahliwaris = $request['KelurahanAhliwaris'];
-        $iptm_perpanjangan->kecamatan_ahliwaris = $request['KecamatanAhliwaris'];
-        $iptm_perpanjangan->kota_ahliwaris = $request['KotaAhliwaris'];
-        $iptm_perpanjangan->telepon_ahliwaris = $request['PhoneAhliwaris'];
-        $iptm_perpanjangan->hubungan_ahliwaris = $request['HubunganAhliwaris'];
-        $iptm_perpanjangan->lokasi_tpu = $request['LokasiTPU'];
-        $iptm_perpanjangan->nama_almarhum = $request['NamaAlmarhum'];
-        $iptm_perpanjangan->tanggal_wafat = $request['tanggalwafat'];
-        $iptm_perpanjangan->blok_makam = $request['Blok'];
-        $iptm_perpanjangan->blad_makam = $request['Blad'];
-        $iptm_perpanjangan->petak_makam = $request['Petak'];
-        $iptm_perpanjangan->masa_berlaku = $request['Masa_berlaku'];
-        $iptm_perpanjangan->jumlah_perpanjangan = $request['fileIPTM_asli'];
-        $iptm_perpanjangan->pemakaman_id = $id;
+
+        $iptm_perpanjangan = IPTM::find($id);
+        $iptm_perpanjangan->tanggal_iptm = now();
+        $iptm_perpanjangan->masa_berlaku = $request["perpanjang_hingga"];
 
         if ($request->hasFile('fileIPTM_asli')) {
             $file = $request->file('fileIPTM_asli');
@@ -87,20 +51,30 @@ class PerpanjanganController extends Controller
         }
 
         $iptm_perpanjangan->save();
-        $randRegisNumber = 'PR00';
-        echo ++$randRegisNumber;
-        $registrasi = new nomorPemesanan();
-        $registrasi->perizinan_id = $iptm_perpanjangan->id;
-        $registrasi->Registrasi_number = $randRegisNumber;
-        $registrasi->Registrasi_Status = 'Waiting';
-        $registrasi->save();
+
 
         if($user->role == "admin_tpu")
         {
-            return redirect('/IPTM/perpanjangan/cetak/'.$iptm_perpanjangan->id);
+            $perpanjangan = new Perpanjangan();
+            $perpanjangan->iptm_id = $id;
+            $perpanjangan->tanggal_surat = now();
+            $perpanjangan->tahun_surat = intval(date("Y"));
+            $perpanjangan->status = "approved";
+            $perpanjangan->cetak_oleh = Auth::user()->id;
+            $perpanjangan->save();
+
+            return redirect('/IPTM/perpanjangan/cetak/'.$perpanjangan->id);
         }
         else
         {
+            $randRegisNumber = 'PR00';
+            echo ++$randRegisNumber;
+            $registrasi = new nomorPemesanan();
+            $registrasi->perizinan_id = $iptm_perpanjangan->id;
+            $registrasi->Registrasi_number = $randRegisNumber;
+            $registrasi->Registrasi_Status = 'Waiting';
+            $registrasi->save();
+
             return redirect('/IPTM/perpanjangan/sukses/' . $iptm_perpanjangan->id)->with('register_success', 'Welcome');
         }
     }

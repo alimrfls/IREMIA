@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    @if($tipe)
-        {{$tipe}} : [ {{$data}} ]
+    @if($data)
+        {{$data}}
     @endif
 </body>
 </html>

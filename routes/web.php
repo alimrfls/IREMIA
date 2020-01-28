@@ -11,18 +11,12 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// dashboard
-//=========================================================================
+
 Auth::routes();
 Route::get('/', 'UserController@index');
 Route::get('/dashboard',    function(){
     return view('home');
 });
-//==========================================================================
-
 
 
 //All IPTM
@@ -30,7 +24,6 @@ Route::get('/IPTM/{inputType}/sukses/{id}','IPTMController@ShowSuksesInput');
 Route::get('/IPTM/{inputType}/cetak/{id}','IPTMController@PrintIPTM');
 
 //IPTM Perpanjangan
-
 Route::get('/IPTM/perpanjangan','PerpanjanganController@ShowFormPerpanjanganBaru');
 Route::post('/IPTM/perpanjangan/submit','PerpanjanganController@SubmitPerpanjangan');
 Route::get('/IPTM/perpanjangan/{id}','PerpanjanganController@ShowFormPerpanjangan');
@@ -51,9 +44,6 @@ Route::get('/izinTumpangan',function (){
 
 Route::get('/IPTM/tumpangan/cetak/{id}', 'TumpanganController@PrintIPTMPerpanjangan');
 
-
-//routes regis Pemakaman
-//==========================================================================
 Route::post('/pendaftaranPemakaman','PemakamanController@regisPemakaman');
 Route::get('/pendaftaranPemakaman',function (){
     return view('Pemakaman.registerpic');
@@ -61,69 +51,6 @@ Route::get('/pendaftaranPemakaman',function (){
 
 Route::get('/pemakaman','PemakamanController@ShowPemakaman');
 //==========================================================================
-
-
-//add makam sesuai tpu
-//button insert di lihat Pemakaman
-//==========================================================================
-
-Route::get('/daftarMakam',function(){
-    return view('Makam.insert_datamakam');
-});
-//==========================================================================
-
-
-//lihat Makam
-//==========================================================================
-Route::get('/lihatMakam/{id}','PemakamanController@ShowMakam');
-
-//==========================================================================
-
-
-//ijin tumpangan
-//==========================================================================
-
-Route::get('/viewSukses/{id}','IPTMController@ShowSuksesInput');
-//==========================================================================
-
-
-// ijin perpanjangan
-//=============================================================================================
-
-//=============================================================================================
-
-
-// cari dan liat Pemakaman
-//=====================================================================================
-Route::get('/pemakaman/cari','PemakamanController@ShowAllPemakaman');
-Route::get('/pemakaman/{id}','PemakamanController@ShowDetailPemakamanByUser');
-//=====================================================================================
-
-
-//Cetak By Admin
-//=======================================================
-
-
-Route::get('/IPTM/pemindahan','PemindahanController@showFormCetakPemindahan');
-Route::get('/IPTM/riwayat','IPTMController@ShowRiwayatCetakIPTM');
-
-
-
-Route::get('/IPTM/pemindahan/cetak/{id}', 'PemindahanController@PrintIPTMPerpanjangan');
-
-//=======================================================
-
-
-// Member can Access temporary
-//=======================================================
-
-Route::get('/profile',function (){
-    return view('auth.profile');
-});
-
-Route::get('/profile/edit',function (){
-    return view('auth.edit-profile');
-});
 
 Route::get('/pemakaman/pesanan','PemesananController@showStatusPemesanan');
 
@@ -135,13 +62,39 @@ Route::get('/pemakaman/jadwal',function (){
     return view('Pemakaman.jadwal-pemakaman');
 });
 
-Route::get('/pemakaman/kadaluarsa',function (){
-    return view('Makam.makam-kadaluarsa');
-});
-//Route::get('/pemakaman/pesanan',function (){
-//    return view('Pemesanan.pemeriksaan-pemesanan');
-//});
+
+Route::get('/pemakaman/expired', 'IPTMController@ShowMakamKadaluarsa');
+
 Route::get('/pemakaman/kelola',function (){
     return view('Makam.manage-makam');
 });
-//========================================================
+
+Route::get('/daftarMakam',function(){
+    return view('Makam.insert_datamakam');
+});
+
+Route::get('/lihatMakam/{id}','PemakamanController@ShowMakam');
+
+Route::get('/viewSukses/{id}','IPTMController@ShowSuksesInput');
+
+
+Route::get('/pemakaman/cari','PemakamanController@ShowAllPemakaman');
+//Route::get('/pemakaman/{id}','PemakamanController@ShowDetailPemakamanByUser');
+
+
+Route::get('/IPTM/pemindahan','PemindahanController@showFormCetakPemindahan');
+Route::get('/IPTM/riwayat','IPTMController@ShowRiwayatCetakIPTM');
+Route::get('/IPTM/pemindahan/cetak/{id}', 'PemindahanController@PrintIPTMPerpanjangan');
+
+
+Route::get('/profile',function (){
+    return view('auth.profile');
+});
+
+Route::get('/profile/edit',function (){
+    return view('auth.edit-profile');
+});
+
+
+//JSON Request
+Route::get("/json/iptm", "IPTMController@RequestGetIPTM");
