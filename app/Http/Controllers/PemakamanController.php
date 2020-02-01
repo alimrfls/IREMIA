@@ -80,21 +80,12 @@ class PemakamanController extends Controller
     }
 
     public function ShowPemakaman(){
-        $pemakaman = DB::table('pemakaman','users')
+        $pemakaman = DB::table('pemakaman')
             ->join('users','pemakaman.id','=','users.pemakaman_id')
-            ->where('users.id','=',Auth::user()->id)
             -> get();
-        $makam =DB::table('pemakaman','makam')
-            -> join('makam','pemakaman.id','=','makam.pemakaman_id')
-            ->get();
-        $users = DB::table('pemakaman','users')
-            ->join('users','pemakaman.id','=','users.pemakaman_id')
-            ->get();
-       // print_r($Pemakaman);
+
         return view('pemakaman.lihat_detail')->with([
             "pemakamanumum" => $pemakaman,
-            "makams"=>$makam,
-            "picpemakaman"=>$users
             ]);
 
     }

@@ -140,50 +140,100 @@
                                                 <div class="form-group col-sm-6">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">Tanggal Surat</div>
-                                                        <input type="text" id="tanggal_surat_kehilangan" name="tanggal_surat_kehilangan" class="form-control">
+                                                        <input type="date" id="tanggal_surat_kehilangan" name="tanggal_surat_kehilangan" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
                                             <h6>Surat IPTM Tumpangan Baru</h6>
                                             <hr>
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">No Surat <span class="field-required">*</span></div>
+                                                        <input type="text" id="nomor_surat_baru" name="nomor_surat_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Tanggal Surat <span class="field-required">*</span></div>
+                                                        <input type="date" id="tanggal_surat_baru" name="tanggal_surat_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <div class="input-group-addon">No Surat <span class="field-required">*</span></div>
-                                                    <input type="text" id="nomor_surat" name="nomor_surat" class="form-control" required>
+                                                    <div class="input-group-addon">No IPTM <span class="field-required">*</span></div>
+                                                    <input type="text" id="nomor_iptm_baru" name="nomor_iptm_baru" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <h6>Data Almarhum</h6>
+                                            <hr>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">Nama Almarhum <span class="field-required">*</span></div>
+                                                    <input type="text" id="nama_almarhum_baru" name="nama_almarhum_baru" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-sm-6">
                                                     <div class="input-group">
-                                                        <div class="input-group-addon">Tanggal Surat <span class="field-required">*</span></div>
-                                                        <input type="text" id="tanggal_surat" name="tanggal_surat" class="form-control" required>
+                                                        <div class="input-group-addon">No KTP <span class="field-required">*</span></div>
+                                                        <input type="text" id="no_ktp_baru" name="no_ktp_baru" class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <div class="input-group">
-                                                        <div class="input-group-addon">Tahun Surat <span class="field-required">*</span></div>
-                                                        <input type="text" id="tahun_surat" name="tahun_surat" class="form-control" required>
+                                                        <div class="input-group-addon">Tanggal Wafat <span class="field-required">*</span></div>
+                                                        <input type="date" id="tanggal_wafat_baru" name="tanggal_wafat_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                    <div class="input-group">
+                                                        <input type="text" id="nomor_sk_kematian_kelurahan_baru" placeholder="No SK Kematian Kelurahan*" name="nomor_sk_kematian_kelurahan_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="No SK Kematian Rumah Sakit*" id="nomor_sk_kematian_rumah_sakit_baru" name="nomor_sk_kematian_rumah_sakit_baru" class="form-control" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
-                                            <h6>Surat IPTM Tumpangan Baru</h6>
+                                            <h6>Data Ahli Waris</h6>
                                             <hr>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <div class="input-group-addon">Perpanjang Hingga <span class="field-required">*</span></div>
-                                                    <input type="date" name="perpanjang_hingga" placeholder="Perpanjang Hingga" class="form-control" required>
+                                                    <div class="input-group-addon">Nama Ahli Waris <span class="field-required">*</span></div>
+                                                    <input type="text" id="nama_almarhum_baru" name="nama_almarhum_baru" class="form-control" required>
                                                 </div>
                                             </div>
-
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">No KTP <span class="field-required">*</span></div>
+                                                        <input type="text" id="tanggal_wafat_baru" name="tanggal_wafat_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">No Telepon <span class="field-required">*</span></div>
+                                                        <input type="text" id="telepon_ahliwaris_baru" name="telepon_ahliwaris_baru" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="alamat_ahli_waris_baru" id="alamat_ahli_waris_baru" cols="30" rows="5" placeholder="Alamat Ahli Waris"></textarea>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <div class="input-group-addon">Scan IPTM Asli <span class="field-required">*</span></div>
-                                                    <input name="iptm_asli" type="file" class="form-control" required>
+                                                    <div class="input-group-addon">Kota Asal <span class="field-required">*</span></div>
+                                                    <input type="text" id="kota_asal_baru" name="kota_asal_baru" class="form-control" required>
                                                 </div>
                                             </div>
-
                                             <div hidden>
                                                 <input type="text" value="" id="iptm_id" name="iptm_id">
                                             </div>

@@ -45,110 +45,169 @@
     @if(Auth::check())
 
         @if(count($pemakamanumum)>0)
-            @foreach($pemakamanumum as $tpu)
-                <div class=" tab-pane container" id="information_pemakaman" role="tabpanel" aria-labelledby="information">
-                    <h1 style="padding-top: 15px; padding-bottom: 20px">
-                        {{$tpu->nama_pemakaman}}
-                    </h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @if($tpu->photo_pemakaman != "")
-                                <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" width="100%" alt="">
-                            @else
-                                <img src="/images/no-image-available.jpg" width="100%" alt="">
-                            @endif
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-information" role="tabpanel" aria-labelledby="pills-detaik-tab">
-                                    <div class=" tab-pane container" id="detail_pemakaman" role="tabpanel" aria-labelledby="alldetail">
-                                        <div class="card-header">
-                                            <strong>INFORMASI DETAIL</strong>
-                                        </div>
-                                        <div class="card-body card-block">
-                                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="text-input" class=" form-control-label">Nama Penanggung Jawab</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        @if(count($picpemakaman)>0)
-                                                            @foreach($picpemakaman as $pic)
-                                                                <p>{{$pic->fullname}} <br>NIP: {{$pic->NIP_kepala_pemakaman}}</p>
-                                                            @endforeach
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label class=" form-control-label">Nama pemakaman</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->nama_pemakaman}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="text-input" class=" form-control-label">Alamat Pemakaman</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->alamat_pemakaman}},{{$tpu->kota_pemakaman}},{{$tpu->provinsi_pemakaman}},{{$tpu->kodepos_pemakaman}}</p>
-                                                    </div>
+            @php( $tpu = $pemakamanumum[0])
 
+            <div class=" tab-pane container" id="information_pemakaman" role="tabpanel" aria-labelledby="information">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-information" role="tabpanel" aria-labelledby="pills-detaik-tab">
+                        <div class=" tab-pane container" id="detail_pemakaman" role="tabpanel" aria-labelledby="alldetail">
+                            <div class="card-header">
+                                <strong>INFORMASI DETAIL {{strtoupper($tpu->nama_pemakaman)}}</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        @if($tpu->photo_pemakaman != "")
+                                            <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" width="100%" alt="">
+                                        @else
+                                            <img src="/images/no-image-available.jpg" width="100%" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8">
+                                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="text-input" class=" form-control-label">Nama Penanggung Jawab</label>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="textearea-input" class=" form-control-label">Email Pemakaman</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->email_pemakaman}}</p>
-                                                    </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->fullname}} <br>NIP: {{$tpu->NIP_kepala_pemakaman}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label class=" form-control-label">Nama pemakaman</label>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->nama_pemakaman}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="text-input" class=" form-control-label">Alamat Pemakaman</label>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->alamat_pemakaman}},{{$tpu->kota_pemakaman}},{{$tpu->provinsi_pemakaman}},{{$tpu->kodepos_pemakaman}}</p>
+                                                </div>
 
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="textearea-input" class=" form-control-label">Email Pemakaman</label>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="textearea-input" class=" form-control-label">Jumlah Pemakaman :</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->jumlah_pemakaman}}</p>
-                                                    </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->email_pemakaman}}</p>
+                                                </div>
 
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="textearea-input" class=" form-control-label">Jumlah Pemakaman :</label>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="text-input" class=" form-control-label">Luas Pemakaman</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->luas_pemakaman}}</p>
-                                                    </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->jumlah_pemakaman}}</p>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <div class="col col-md-6">
-                                                        <label for="text-input" class=" form-control-label">Deskripsi Pemakaman</label>
-                                                    </div>
-                                                    <div class="col col-md-6">
-                                                        <p>{{$tpu->deskripsi_pemakaman}}</p>
-                                                    </div>
+
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="text-input" class=" form-control-label">Luas Pemakaman</label>
                                                 </div>
-                                            </form>
-                                        </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->luas_pemakaman}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-6">
+                                                    <label for="text-input" class=" form-control-label">Deskripsi Pemakaman</label>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <p>{{$tpu->deskripsi_pemakaman}}</p>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-right" style="margin-top: 15px;">
-                                <a href="/IPTM/perpanjangan">
-                                    <button class="btn btn-info" type="button" >Jadwal Pemakaman</button>
-                                </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right" style="margin-top: 15px;">
+                    <button class="btn btn-primary" type="button" data-target="#EditPemakamanModal" data-toggle="modal">Edit Informasi</button>
 
-                                <a href="/IPTM/tumpangan">
-                                    <button class="btn btn-primary" type="button" >Edit Informasi</button>
-                                </a>
+                    <div class="modal fade" id="EditPemakamanModal" tabindex="-1" role="dialog" aria-labelledby="EditPemakamanModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="EditPemakamanModalLabel">Edit Informasi Pemakaman</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                @if($tpu->photo_pemakaman != "")
+                                                    <img src="/images/pemakaman/{{$tpu->photo_pemakaman}}" width="100%" alt="">
+                                                @else
+                                                    <img src="/images/no-image-available.jpg" width="100%" alt="">
+                                                @endif
+                                                    <input type="file" class="form-control" >
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Nama Pemakaman</div>
+                                                        <input type="text" value="{{$tpu->nama_pemakaman}}" id="nama_pemakaman" name="nama_pemakaman" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Email Pemakaman</div>
+                                                        <input type="email" value="{{$tpu->email_pemakaman}}" id="email_pemakaman" name="email_pemakaman" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Kapasitas Pemakaman</div>
+                                                        <input type="email" value="{{$tpu->jumlah_pemakaman}}" id="jumlah_pemakaman" name="jumlah_pemakaman" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Luas Pemakaman</div>
+                                                        <input type="email" value="{{$tpu->luas_pemakaman}}" id="luas_pemakaman" name="luas_pemakaman" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Alamat Pemakaman</div>
+                                                        <textarea name="alamat_pemakaman" id="alamat_pemakaman" class="form-control" rows="3">{{$tpu->alamat_pemakaman}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Deskripsi Pemakaman</div>
+                                                        <textarea name="deskripsi_pemakaman" id="deskripsi_pemakaman" class="form-control" rows="3">{{$tpu->deskripsi_pemakaman}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            @endforeach
+            </div>
         @endif
     @else
         <h2>please Login First</h2>

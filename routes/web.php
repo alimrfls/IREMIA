@@ -79,6 +79,8 @@ Route::get('/viewSukses/{id}','IPTMController@ShowSuksesInput');
 
 
 Route::get('/pemakaman/cari','PemakamanController@ShowAllPemakaman');
+
+Route::get('/pemakaman/edit/{id}','PemakamanController@ShowDetailPemakamanByUser');
 //Route::get('/pemakaman/{id}','PemakamanController@ShowDetailPemakamanByUser');
 
 
