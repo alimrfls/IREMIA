@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pemakaman;
 use App\product;
 use App\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,18 @@ class UserController extends Controller
 
     public function index()
     {
+        if(Auth::user()) {
+            $role = Auth::user()->role;
+            if ($role == "member") {
+                $pemakaman = Pemakaman::all();
+
+                return view('welcome')->with([
+                    'pemakaman' => $pemakaman
+                ]);
+            } else {
+                return view('home');
+            }
+        }
         return view('welcome');
     }
 

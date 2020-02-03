@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    @if($perpanjangan)
-        {{$perpanjangan}}
+    @if($data)
+        {{$data}}
     @endif
 </body>
 </html>

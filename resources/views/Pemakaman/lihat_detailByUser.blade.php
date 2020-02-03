@@ -130,7 +130,7 @@
                                 <form action="" method="post" enctype="multipart/form-data"
                                       class="form-horizontal">
                                     <div class="col-md-5">
-                                        <img src="/images/pemakaman/{{$detailpemakamans->photoPemakaman}}" width="300px"
+                                        <img src="/images/pemakaman/{{$detailpemakamans->photo_pemakaman}}" width="300px"
                                              height="250px">
                                     </div>
                                     <div class="row form-group">
@@ -138,7 +138,7 @@
                                             <strong style="color: black"> Nama Pemakaman : </strong>
                                         </div>
                                         <div class="col col-md-6">
-                                            <p style="color: black">{{$detailpemakamans->namaPemakaman}}</p>
+                                            <p style="color: black">{{$detailpemakamans->nama_pemakaman}}</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -147,10 +147,10 @@
                                         </div>
                                         <div class="col col-md-6">
                                             <p style="color: black">
-                                                {{$detailpemakamans->alamatPemakaman}}
-                                                ,{{$detailpemakamans->kotaPemakaman}}
-                                                ,{{$detailpemakamans->provinsiPemakaman}}
-                                                ,{{$detailpemakamans->kodeposPemakaman}}
+                                                {{$detailpemakamans->alamat_pemakaman}}
+                                                ,{{$detailpemakamans->kota_pemakaman}}
+                                                ,{{$detailpemakamans->provinsi_pemakaman}}
+                                                ,{{$detailpemakamans->kodepos_pemakaman}}
                                             </p>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                             <strong style="color: black"> E-Mail Pemakaman : </strong>
                                         </div>
                                         <div class="col col-md-6">
-                                            <p style="color: black">{{$detailpemakamans->emailPemakaman}}</p>
+                                            <p style="color: black">{{$detailpemakamans->email_pemakaman}}</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -167,7 +167,7 @@
                                             <strong style="color: black"> Jumlah Makam : </strong>
                                         </div>
                                         <div class="col col-md-6">
-                                            <p style="color: black">{{$detailpemakamans->jumlahPemakaman}}</p>
+                                            <p style="color: black">{{$detailpemakamans->jumlah_pemakaman}}</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -175,7 +175,7 @@
                                             <strong style="color: black"> Luas Pemakaman : </strong>
                                         </div>
                                         <div class="col col-md-6">
-                                            <p style="color: black">{{$detailpemakamans->luasPemakaman}}</p>
+                                            <p style="color: black">{{$detailpemakamans->luas_pemakaman}}</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -212,7 +212,7 @@
                                             </div>
                                             <br><br><br>
                                             <div class="text-center">
-                                                <a href="/formPerpanjangan/{{$detailpemakamans->pemakamanid}}"
+                                                <a href="/formPerpanjangan/{{$detailpemakamans->id}}"
                                                    class="btn btn-primary" type="button">
                                                     IPTM Perpanjangan
                                                 </a>
@@ -234,7 +234,7 @@
                                             </div>
                                             <br><br><br><br><br>
                                             <div class="text-center">
-                                                <a href="/formTumpangan/{{$detailpemakamans->pemakamanid}}"
+                                                <a href="/formTumpangan/{{$detailpemakamans->id}}"
                                                    class="btn btn-primary" type="button">
                                                     IPTM Tumpangan
                                                 </a>

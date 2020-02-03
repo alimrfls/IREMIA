@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\IPTMPerpanjangan;
-use App\makamTumpangan;
+use App\Perpanjangan;
+use App\Tumpangan;
 use App\Pemakaman;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -80,32 +80,23 @@ class PemakamanController extends Controller
     }
 
     public function ShowPemakaman(){
-        $pemakaman = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
-            ->where('users.id','=',Auth::user()->id)
+        $pemakaman = DB::table('pemakaman')
+            ->join('users','pemakaman.id','=','users.pemakaman_id')
             -> get();
-        $makam =DB::table('Pemakaman','makams')
-            -> join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
-            ->get();
-        $users = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
-            ->get();
-       // print_r($Pemakaman);
-        return view('Pemakaman.lihat_detail')->with([
+
+        return view('pemakaman.lihat_detail')->with([
             "pemakamanumum" => $pemakaman,
-            "makams"=>$makam,
-            "picpemakaman"=>$users
             ]);
 
     }
 
     public function ShowMakam($id){
-        $makams = DB::table('makams','Pemakaman')
-            ->join('Pemakaman','makams.pemakaman_id','=','Pemakaman.pemakamanid')
-            ->where('Pemakaman.pemakamanid','=',$id)
+        $makams = DB::table('makam','Pemakaman')
+            ->join('Pemakaman','makam.pemakaman_id','=','Pemakaman.id')
+            ->where('Pemakaman.id','=',$id)
             ->get();
-        $makamtumpangan =DB::table('Pemakaman','makams')
-            -> join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
+        $makamtumpangan =DB::table('Pemakaman','makam')
+            -> join('makam','Pemakaman.id','=','makam.pemakaman_id')
             ->get();
         return view ('Makam.show_Makam')->with([
             "listmakam"=>$makams,
@@ -115,13 +106,13 @@ class PemakamanController extends Controller
 
     public function ShowDetailPemakamanByUser($pemakamanid){
         $pemakamandetail = DB::table('Pemakaman')
-            ->where('Pemakaman.pemakamanid','=',$pemakamanid)
+            ->where('Pemakaman.id','=',$pemakamanid)
             ->get();
-        $makamtumpangan = DB::table('Pemakaman','makams')
-            ->join('makams','Pemakaman.pemakamanid','=','makams.pemakaman_id')
+        $makamtumpangan = DB::table('Pemakaman','makam')
+            ->join('makam','Pemakaman.id','=','makam.pemakaman_id')
             ->get();
         $users = DB::table('Pemakaman','users')
-            ->join('users','Pemakaman.pemakamanid','=','users.pemakaman_id')
+            ->join('users','Pemakaman.id','=','users.pemakaman_id')
             ->get();
         return view('Pemakaman.lihat_detailByUser')->with([
             "detailpemakaman"=>$pemakamandetail,
@@ -162,7 +153,7 @@ class PemakamanController extends Controller
         $file = $request->file('photo_makam3');
         $file->move(public_path('/images/makamtumpangan'), $file->getClientOriginalName());
 
-        $makam_tumpangan = new makamTumpangan();
+        $makam_tumpangan = new Tumpangan();
         $makam_tumpangan->nama_Almarhum = $request['nama_Almarhum'];
         $makam_tumpangan->tanggal_Wafat = $request['tanggal_Wafat'];
         $makam_tumpangan->lokasi_Pemakaman = $request['lokasi_Pemakaman'];

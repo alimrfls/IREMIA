@@ -11,12 +11,12 @@
                         </button>
                     </div>
                 @endif
-                asdasdasd
-                @if(count($pemakamanname)>0) @foreach($pemakamanname as $pemakamanName)
+                @if(count($cetakPemakamanName)>0)
+                        @foreach($cetakPemakamanName as $pemakamanName)
                     <div class="col-md-12">
-                        <form action="/form_perpanjangan/{{$pemakamanName->pemakaman_id}}" method="POST" enctype="multipart/form-data">
+                        <form action="/IPTM/perpanjangan/submit" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <h2> Perpanjangan Ijin Pada Pemakaman {{$pemakamanName->nama_pemakaman}}</h2>
+                            <h2> Perpanjangan Izin Pada Pemakaman {{$pemakamanName->nama_pemakaman}}</h2>
                             <hr style="border: solid">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -174,10 +174,34 @@
                             </div>
                             <br/>
                             <br/>
-                            <button type="submit" id="submit" class="btn btn-primary btn-flat m-b-30 m-t-30"style="float: right">Submit</button>
+                            <button type="button" id="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" data-toggle="modal" data-target="#ModalConfirmData" style="float: right">Submit</button>
+
+                            <div class="modal fade" id="ModalConfirmData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Cetak Dokumen</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda yakin akan mencetak dokumen ini? <br>
+                                            Pastikan data yang anda isi telah sesuai!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="text" id="operation_type" name="operation_type" value="cetak_iptm_perpanjangan" hidden>
+                                            <input type="text" id="id_pemakaman" name="id_pemakaman" value="{{$pemakamanName->id}}" hidden>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                                            <button type="submit" class="btn btn-primary">Ya, Cetak</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
-                @endforeach @endif
+                @endforeach
+                    @endif
             </div>
         </div>
     </div>

@@ -11,18 +11,36 @@
             </div>
         @endif
         <div class="text-md-left">
-            <div class="form-group">
-                <label>NAMA LENGKAP</label>
-                <input type="text" class="form-control" value="{{Auth::user()->fullname}}" disabled="disabled">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        @if(Auth::user()->images != "")
+                            <img src="/images/profile/{{Auth::user()->images}}" width="100%" alt="">
+                        @else
+                            <img src="/images/no-image-available.jpg" width="100%" alt="">
+                        @endif
+                        {{--<input type="file" class="form-control" >--}}
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label>NAMA LENGKAP</label>
+                        <input type="text" class="form-control" value="{{Auth::user()->fullname}}" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label>ALAMAT EMAIL</label>
+                        <input type="text" class="form-control" value="{{Auth::user()->email}}" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label>ALAMAT</label>
+                        <textarea name="address" id="" cols="30" rows="5" class="form-control" disabled="disabled">{{Auth::user()->address}}</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <a href="{{url('/profile/edit')}}"><button class="btn btn-info"><span class="fa fa-gears"></span> Ubah Profil </button></a>
+                </div>
             </div>
-            <div class="form-group">
-                <label>ALAMAT EMAIL</label>
-                <input type="text" class="form-control" value="{{Auth::user()->email}}" disabled="disabled">
-            </div>
-            <div class="form-group">
-                <label>ALAMAT</label>
-                <textarea name="address" id="" cols="30" rows="10" class="form-control" disabled="disabled">{{Auth::user()->address}}</textarea>
-            </div>
+
             {{--<div class="form-group">
                 <label>JENIS KELAMIN</label>
                 <div class="form-check-inline form-check" style="width: 100%">
@@ -34,14 +52,8 @@
                     </label>
                 </div>
             </div>--}}
-            <div class="form-group">
-                <label>FOTO</label>
-                <br>
-                <img width="200px" class="img-thumbnail" src="/images/pemakaman/{{Auth::user()->images}}" alt="profile pic" style="border-radius: 150px">
-            </div>
-            <div class="text-center">
-                <a href="{{url('/profile/edit')}}"><button class="btn btn-info"><span class="fa fa-gears"></span> Ubah Profil </button></a>
-            </div>
+
+
         </div>
     </div>
 @endsection

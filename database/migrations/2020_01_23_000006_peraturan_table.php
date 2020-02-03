@@ -15,9 +15,11 @@ class PeraturanTable extends Migration
     {
         Schema::create('peraturan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Deskripsi')->nullable();
-            $table->string('pemakaman_id')->nullable();
+            $table->integer('pemakaman_id')->unsigned();
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
+
+            $table->foreign('pemakaman_id')->references('id')->on('pemakaman');;
         });
     }
 

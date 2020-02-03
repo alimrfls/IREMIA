@@ -14,12 +14,20 @@ class RegistrasiTable extends Migration
     public function up()
     {
         Schema::create('nomorpemesanan', function (Blueprint $table) {
-            $table->increments('nomorpemesananid');
-            $table->string('Registrasi_number');
-            $table->string('Registrasi_Status');
-            $table->char('tumpangan_id')->nullable();
-            $table->char('perizinan_id')->nullable();
+            $table->increments('id');
+            $table->integer('iptm_id')->unsigned();
+            $table->string('registrasi_number');
+            $table->string('registrasi_status');
+            /*
+             * $table->char('tumpangan_id')->nullable();
+             * $table->char('perizinan_id')->nullable();
+             */
             $table->timestamps();
+
+        });
+
+        Schema::table('nomorpemesanan', function($table) {
+            $table->foreign('iptm_id')->references('id')->on('iptm');
         });
     }
 

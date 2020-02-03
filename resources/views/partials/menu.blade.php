@@ -43,7 +43,7 @@
                     <a href="/pemakaman"> <i class="menu-icon fa fa-info"></i>Informasi Pemakaman</a>
                 </li>
                 <li class="sub-menu children">
-                    <a href="/pemakaman/kadaluarsa"> <i class="menu-icon fa fa-calendar"></i>Makam Kadaluarsa</a>
+                    <a href="/pemakaman/expired"> <i class="menu-icon fa fa-calendar"></i>Makam Kadaluarsa</a>
                 </li>
                 <li class="sub-menu children">
                     <a href="/pemakaman/jadwal"> <i class="menu-icon fa fa-calendar"></i>Jadwal Pemakaman</a>

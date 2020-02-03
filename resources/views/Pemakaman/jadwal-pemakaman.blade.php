@@ -6,7 +6,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Jadwal Pemakaman</strong>
+                            <div class="col-sm-6" style="padding-top: 10px">
+                                <strong class="card-title">Jadwal Pemakaman</strong>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#tambahJadwalPemakaman"><i class="fa fa-plus"></i> Tambahkan Jadwal Baru</button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -19,6 +24,9 @@
                                     <th>Nama Pemakaman</th>
                                 </tr>
                                 </thead>
+                                <tbody>
+
+                                </tbody>
                                 {{--@if(count($pemakamanall)>0)
                                     @foreach($pemakamanall as $pemakamans)
                                         <tbody>
