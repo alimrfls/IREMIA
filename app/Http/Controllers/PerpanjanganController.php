@@ -91,14 +91,19 @@ class PerpanjanganController extends Controller
     }
 
     public function ShowFormPerpanjanganBaru(){
-        $cetakPemakamanName = DB::table('pemakaman','users')
-            ->join('users','pemakaman.id','=','users.pemakaman_id')
-            ->where('users.id','=',Auth::user()->id)
-            ->get();
-        return view('Perpanjangan.CetakPerpanjangan')->with([
-            "cetakPemakamanName"=>$cetakPemakamanName,
-        ]);
 
+        $user_role= Auth::user()->role;
+        if($user_role == "admin_tpu"){
+            $cetakPemakamanName = DB::table('pemakaman','users')
+                ->join('users','pemakaman.id','=','users.pemakaman_id')
+                ->where('users.id','=',Auth::user()->id)
+                ->get();
+            return view('Perpanjangan.CetakPerpanjangan')->with([
+                "cetakPemakamanName"=>$cetakPemakamanName,
+            ]);
+        }
+
+        return view('member.IPTM.ajukan-perpanjangan');
     }
 
     public function ShowSuksesInputPerpanjangan($id)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\IPTM;
+use App\Pemakaman;
 use App\User;
 use App\Tumpangan;
 use App\Pemindahan;
@@ -89,6 +90,16 @@ class IPTMController extends Controller
         ]);
     }
 
+
+    public function ShowNewIPTMForm(){
+        if(Auth::user()->role == "member"){
+
+            return view('member.buat-iptm');
+
+        }else{
+            return redirect('/');
+        }
+    }
 
     //JSON
     public function RequestGetIPTM(Request $req){

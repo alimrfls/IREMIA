@@ -66,54 +66,44 @@
 <!-- header-start -->
 <header>
     <div class="header-area ">
-        <div id="sticky-header" class="main-header-area">
+        <div id="sticky-header" class="@yield('header-class') ">
             <div class="container-fluid ">
                 <div class="header_bottom_border">
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-2">
                             <div class="logo">
                                 <a href="index.html">
-                                    <img src="/images/assets/logo.png" alt="">
+                                    <img src="/images/logo_iremia.png" alt="">
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-7">
                             <div class="main-menu  d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        @if(Auth::user())
-                                            <li><a href="/">Beranda</a></li>
-                                            <li><a href="#">Pemakaman <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="/pemakaman/cari">Semua Pemakaman</a></li>
-                                                    <li><a href="blog.html">Tata Cara Pemesanan</a></li>
-                                                    <li><a href="blog.html">Persyaratan</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">IPTM <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="/pemakaman/cari">Buat Permohonan IPTM</a></li>
-                                                    <li><a href="/pemakaman/pesanan">Status IPTM Saya</a></li>
-                                                    <li><a href="/pemakaman/pesanan/riwayat">Riwayat IPTM Saya</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Contact</a></li>
-                                        @else
-                                            <li><a href="index.html">Beranda</a></li>
-                                            <li><a href="#">Pemakaman <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="/pemakaman/cari">Daftar Pemakaman</a></li>
-                                                    <li><a href="/pemakaman/jadwal">Jadwal Pemakaman</a></li>
-                                                    <li><a href="blog.html">Tata Cara Pemesanan</a></li>
-                                                    <li><a href="blog.html">Persyaratan</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="FAQ.html">FAQ</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        @endif
-                                    </ul>
-                                </nav>
+                                <ul id="navigation">
+                                    <li><a href="/">Beranda</a></li>
+                                    <li><a href="#">Pemakaman <i class="ti-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/pemakaman/cari">Semua Pemakaman</a></li>
+                                            <li><a href="/pemakaman/jadwal">Jadwal Pemakaman</a></li>
+                                            <li><a href="/pemakaman/tata-cara">Tata Cara Pemesanan</a></li>
+                                            <li><a href="/pemakaman/syarat">Persyaratan</a></li>
+                                        </ul>
+                                    </li>
+
+                                    @if(Auth::user())
+                                        <li><a href="#">IPTM <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="/IPTM/buat-permohonan">Buat Permohonan IPTM</a></li>
+                                                <li><a href="/IPTM/pesanan">Status IPTM Saya</a></li>
+                                                <li><a href="/IPTM/pesanan/riwayat">Riwayat IPTM Saya</a></li>
+                                            </ul>
+                                        </li>
+                                    @endif
+                                    <li><a href="FAQ.html">FAQ</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+
+                                <nav></nav>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">

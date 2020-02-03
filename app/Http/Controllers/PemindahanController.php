@@ -15,13 +15,19 @@ class PemindahanController extends Controller
      */
 
     public function showFormCetakPemindahan(){
-        $cetakPemakamanName = DB::table('pemakaman','users')
-            ->join('users','pemakaman.id','=','users.pemakaman_id')
-            ->where('users.id','=',Auth::user()->id)
-            ->get();
-        return view('Pemindahan.CetakPemindahan')->with([
-            "cetakPemakamanName"=>$cetakPemakamanName,
-        ]);
+
+
+        $user_role= Auth::user()->role;
+        if($user_role == "admin_tpu") {
+            $cetakPemakamanName = DB::table('pemakaman','users')
+                ->join('users','pemakaman.id','=','users.pemakaman_id')
+                ->where('users.id','=',Auth::user()->id)
+                ->get();
+            return view('Pemindahan.CetakPemindahan')->with([
+                "cetakPemakamanName"=>$cetakPemakamanName,
+            ]);
+        }
+        return view ('member.IPTM.ajukan-pemindahan');
     }
 
     public function ShowRiwayatCetakIPTM(){

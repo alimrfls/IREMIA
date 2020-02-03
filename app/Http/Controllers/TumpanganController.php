@@ -124,14 +124,19 @@ class TumpanganController extends Controller
     }
 
     public function ShowFormTumpanganBaru(){
-        $cetakPemakamanName = DB::table('pemakaman','users')
-            ->join('users','pemakaman.id','=','users.pemakaman_id')
-            ->where('users.id','=',Auth::user()->id)
-            ->get();
 
-        return view('Tumpangan.CetakTumpangan')->with([
-            "cetakPemakamanName"=>$cetakPemakamanName,
-        ]);
+        $user_role= Auth::user()->role;
+        if($user_role == "admin_tpu") {
+            $cetakPemakamanName = DB::table('pemakaman', 'users')
+                ->join('users', 'pemakaman.id', '=', 'users.pemakaman_id')
+                ->where('users.id', '=', Auth::user()->id)
+                ->get();
+
+            return view('Tumpangan.CetakTumpangan')->with([
+                "cetakPemakamanName" => $cetakPemakamanName,
+            ]);
+        }
+        return view ('member.IPTM.ajukan-tumpangan');
 
     }
 

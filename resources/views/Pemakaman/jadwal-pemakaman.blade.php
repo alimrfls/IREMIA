@@ -24,6 +24,9 @@
                                     <th>Nama Pemakaman</th>
                                 </tr>
                                 </thead>
+                                <tbody>
+
+                                </tbody>
                                 {{--@if(count($pemakamanall)>0)
                                     @foreach($pemakamanall as $pemakamans)
                                         <tbody>
