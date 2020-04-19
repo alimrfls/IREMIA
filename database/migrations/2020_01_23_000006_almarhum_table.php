@@ -16,21 +16,29 @@ class AlmarhumTable extends Migration
         Schema::create('almarhum', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ahli_waris_id')->unsigned();
-            $table->integer('makam_id')->unsigned();
+            $table->integer('iptm_id')->unsigned()->nullable();
 
-            $table->string('nomor_ktp_almarhum');
             $table->string('nama_almarhum');
             $table->date('tanggal_wafat');
-            $table->string('nomor_sk_kematian_kelurahan');
-            $table->string('nomor_sk_kematian_rumah_sakit');
 
-            $table->string('file_sk_kematian_kelurahan');
-            $table->string('file_sk_kematian_rumah_sakit');
-            $table->string('file_ktp_almarhum');
+            $table->string('nomor_ktp_almarhum');
+            $table->string('file_ktp_almarhum')->nullable();
+
+            $table->string('nomor_kk_almarhum');
+            $table->string('file_kk_almarhum')->nullable();
+
+            $table->string('nomor_sp_rtrw');
+            $table->date('tanggal_sp_rtrw');
+            $table->string('file_sp_rtrw')->nullable();
+
+            $table->string('nomor_sk_kematian_rs');
+            $table->date('tanggal_sk_kematian_rs');
+            $table->string('file_sk_kematian_rs')->nullable();
+
             $table->timestamps();
 
             $table->foreign('ahli_waris_id')->references('id')->on('ahli_waris');
-            $table->foreign('makam_id')->references('id')->on('makam');
+            $table->foreign('iptm_id')->references('id')->on('iptm');
         });
     }
 

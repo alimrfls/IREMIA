@@ -28,8 +28,7 @@
                                                 <td>{{$tabelStatusPemesanan->nama_almarhum}}</td>
                                                 <td>{{$tabelStatusPemesanan->status}}</td>
                                                 <td>
-                                                    <button class="btn btn-success">Terima</button>
-                                                    <button class="btn btn-danger">Tolak</button>
+                                                    <button class="btn btn-info"><i class="fa fa-eye"></i> Lihat Detail</button>
                                                 </td>
                                             </tr>
                                         @endforeach

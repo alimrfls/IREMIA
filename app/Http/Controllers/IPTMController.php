@@ -60,24 +60,24 @@ class IPTMController extends Controller
         {
             $output = DB::table("perpanjangan")->where("perpanjangan.id", "=", $id)
                 ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
-                ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
                 ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
         else if($inputType == "pemindahan")
         {
             $output = DB::table("pemindahan")->where("pemindahan.id", "=", $id)
-                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
-                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get()
-                ->join('makam', 'makam.id', '=', 'almarhum.makam_id');
+                ->join('iptm', 'iptm.id', '=', 'pemindahan.iptm_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
+                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
         else if($inputType == "tumpangan")
         {
             $output = DB::table("tumpangan")->where("tumpangan.id", "=", $id)
-                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
-                ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
+                ->join('iptm', 'iptm.id', '=', 'tumpangan.iptm_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
                 ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
 
@@ -120,8 +120,8 @@ class IPTMController extends Controller
         }
 
         $iptm = DB::table("iptm")
-            ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
-            ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
+            ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+            ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
             ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
             ->where('iptm.nomor_iptm', "=", $noIptm)
             ->orWhere('almarhum.nama_almarhum', "=", $namaAlmarum)
@@ -131,15 +131,15 @@ class IPTMController extends Controller
     }
 
     public function RequestGetIPTMByNo(Request $req){
-        $noIptm = "";
         $noIptm = $req->query('noiptm');
 
         $iptm = DB::table("iptm")
-            ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
-            ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
-            ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
+            ->join('makam', 'makam.id', '=', 'iptm.makam_id')
             ->join('pemakaman', 'pemakaman.id', '=', 'makam.pemakaman_id')
+            ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
+            ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
             ->where('iptm.nomor_iptm', "=", $noIptm)
+            ->orderBy('almarhum.tanggal_wafat', 'desc')
             ->get();
 
         return json_encode($iptm);

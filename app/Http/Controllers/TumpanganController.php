@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\AhliWaris;
+use App\Almarhum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -11,105 +13,97 @@ use App\NomorPemesanan;
 class TumpanganController extends Controller
 {
     //TUMPANGAN
-    public function SubmitTumpangan(Request $request, $id)
+    public function SubmitTumpangan(Request $request)
     {
-        $rules = [
-            'nomor_surat_rtrw' => 'required',
-            'tanggal_surat_rtrw' => 'required',
-            'nomor_sk_kematian_rumah_sakit' => 'required',
-            'nomor_sk_kematian_kelurahan' => 'required',
-            'nomor_iptm' => 'required',
-            'tanggal_iptm' => 'required',
-            'nomor_kehilangan_kepolisian' => 'required',
-            'tanggal_kehilangan_kepolisian' => 'required',
-            'nomor_ktp_ahliwaris' => 'required',
-            'nomor_ktp_almarhum' => 'required',
-            'nomor_kartu_keluarga' => 'required',
-            'nama_ahliwaris' => 'required',
-            'alamat_ahliwaris' => 'required',
-            'rt_ahliwaris' => 'required',
-            'rw_ahliwaris' => 'required',
-            'kelurahan_ahliwaris' => 'required',
-            'kecamatan_ahliwaris' => 'required',
-            'kota_ahliwaris' => 'required',
-            'telepon_ahliwaris' => 'required',
-            'hubungan_ahliWaris' => 'required',
-            'lokasi_tpu' => 'required',
-            'nama_almarhum' => 'required',
-            'nama_almarhum_lama' => 'required',
-            'tanggal_wafat' => 'required',
-            'blok_makam' => 'required',
-            'blad_makam' => 'required',
-            'petak_makam' => 'required',
-            'masa_berlaku_iptm' => 'required'
-        ];
-        //$Pemakaman = Pemakaman::find('pemakamanid');
+        $id = $request['iptm_id'];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('/formTumpangan/' . $id)->withErrors($validator)->withInput();
+        $randomId = "   TPN-".rand(pow(10, 5-1), pow(10, 5)-1);
+
+        $ahliwaris = new AhliWaris();
+        $ahliwaris->nomor_ktp_ahliwaris = $request->nomor_ktp_ahliwaris;
+        $ahliwaris->nama_ahliwaris = $request->nama_ahliwaris;
+        $ahliwaris->alamat_ahliwaris = $request->alamat_ahliwaris;
+        $ahliwaris->rt_ahliwaris = $request->rt_ahliwaris;
+        $ahliwaris->rw_ahliwaris = $request->rw_ahliwaris;
+        $ahliwaris->kelurahan_ahliwaris = $request->kelurahan_ahliwaris;
+        $ahliwaris->kecamatan_ahliwaris = $request->kecamatan_ahliwaris;
+        $ahliwaris->kota_ahliwaris = $request->kota_administrasi;
+        $ahliwaris->telepon_ahliwaris = $request->telepon_ahliwaris;
+        $ahliwaris->hubungan_ahliWaris = $request->hubungan_ahliwaris;
+        $ahliwaris->save();
+
+
+        $almarhum = new Almarhum();
+        $almarhum->ahli_waris_id = $ahliwaris->id;
+
+        $almarhum->nama_almarhum = $request->nama_almarhum;
+        $almarhum->tanggal_wafat = $request->tanggal_wafat;
+
+        $almarhum->nomor_ktp_almarhum = $request->nomor_ktp_almarhum;
+        if ($request->hasFile('file_ktp_almarhum')) {
+            $file = $request->file('file_ktp_almarhum');
+            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
+
+            $almarhum->file_ktp_almarhum = $file->getClientOriginalName();
         }
 
-        $iptm_tumpangan = new Tumpangan();
-        $iptm_tumpangan->nomor_surat_rtrw = $request['nomor_surat_rtrw'];
-        $iptm_tumpangan->tanggal_surat_rtrw = $request['tanggal_surat_rtrw'];
-        $iptm_tumpangan->nomor_sk_kematian_rumah_sakit = $request['nomor_sk_kematian_rumah_sakit'];
-        $iptm_tumpangan->nomor_sk_kematian_kelurahan = $request['nomor_sk_kematian_kelurahan'];
-        $iptm_tumpangan->nomor_iptm = $request['nomor_iptm'];
-        $iptm_tumpangan->tanggal_iptm = $request['tanggal_iptm'];
-        $iptm_tumpangan->nomor_kehilangan_kepolisian = $request['nomor_kehilangan_kepolisian'];
-        $iptm_tumpangan->tanggal_kehilangan_kepolisian = $request['tanggal_kehilangan_kepolisian'];
-        $iptm_tumpangan->nomor_ktp_ahliwaris = $request['nomor_ktp_ahliwaris'];
-        $iptm_tumpangan->nomor_ktp_almarhum = $request['nomor_ktp_almarhum'];
-        $iptm_tumpangan->nomor_kartu_keluarga = $request['nomor_kartu_keluarga'];
-        $iptm_tumpangan->nama_ahliwaris = $request['nama_ahliwaris'];
-        $iptm_tumpangan->alamat_ahliwaris = $request['alamat_ahliwaris'];
-        $iptm_tumpangan->rt_ahliwaris = $request['rt_ahliwaris'];
-        $iptm_tumpangan->rw_ahliwaris = $request['rw_ahliwaris'];
-        $iptm_tumpangan->kelurahan_ahliwaris = $request['kelurahan_ahliwaris'];
-        $iptm_tumpangan->kecamatan_ahliwaris = $request['kecamatan_ahliwaris'];
-        $iptm_tumpangan->kota_ahliwaris = $request['kota_ahliwaris'];
-        $iptm_tumpangan->telepon_ahliwaris = $request['telepon_ahliwaris'];
-        $iptm_tumpangan->hubungan_ahliWaris = $request['hubungan_ahliWaris'];
-        $iptm_tumpangan->lokasi_tpu = $request['lokasi_tpu'];
-        $iptm_tumpangan->nama_almarhum = $request['nama_almarhum'];
-        $iptm_tumpangan->nama_almarhum_lama = $request['nama_almarhum_lama'];
-        $iptm_tumpangan->tanggal_wafat = $request['tanggal_wafat'];
-        $iptm_tumpangan->blok_makam = $request['blok_makam'];
-        $iptm_tumpangan->blad_makam = $request['blad_makam'];
-        $iptm_tumpangan->petak_makam = $request['petak_makam'];
-        $iptm_tumpangan->masa_berlaku_iptm = $request['masa_berlaku_iptm'];
-        $iptm_tumpangan->pemakaman_id = $id;
+        $almarhum->nomor_kk_almarhum = $request->nomor_kk_almarhum;
+        if ($request->hasFile('file_kk_almarhum')) {
+            $file = $request->file('file_kk_almarhum');
+            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
 
+            $almarhum->file_kk_almarhum = $file->getClientOriginalName();
+        }
+
+        //Surat pengantar RT/RW
+        $almarhum->nomor_sp_rtrw = $request->nomor_sp_rtrw;
+        $almarhum->tanggal_sp_rtrw = $request->tanggal_sp_rtrw;
+        if ($request->hasFile('file_sp_rtrw')) {
+            $file = $request->file('file_sp_rtrw');
+            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
+
+            $almarhum->file_sp_rtrw = $file->getClientOriginalName();
+        }
+
+        //Surat keterangan RS
+        $almarhum->nomor_sk_kematian_rs = $request->nomor_sk_kematian_rs;
+        $almarhum->tanggal_sk_kematian_rs = $request->tanggal_sk_kematian_rs;
+        if ($request->hasFile('file_sk_kematian_rs')) {
+            $file = $request->file('file_sk_kematian_rs');
+            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
+
+            $almarhum->file_sk_kematian_rs = $file->getClientOriginalName();
+        }
+        $almarhum->save();
+
+
+        $iptm_tumpangan = new Tumpangan();
+        $iptm_tumpangan->iptm_lama_id = $id;
+        $iptm_tumpangan->status = "waiting";
+
+        $iptm_tumpangan->almarhum_id = $almarhum->id;
+        $iptm_tumpangan->pemohon_id = Auth::user()->id;
+
+        $iptm_tumpangan->nomor_surat = $randomId;
+        $iptm_tumpangan->tanggal_surat = now();
+
+        $iptm_tumpangan->nomor_sk_kehilangan_kepolisian = $request->nomor_kehilangan_kepolisian;
+        $iptm_tumpangan->tanggal_sk_kehilangan_kepolisian = $request->tanggal_kehilangan_kepolisian;
+
+        if ($request->hasFile('file_sk_kehilangan_kepolisian')) {
+            $file = $request->file('file_sk_kehilangan_kepolisian');
+            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
+            $iptm_tumpangan->file_sk_kehilangan_kepolisian = $file->getClientOriginalName();
+        }
         if ($request->hasFile('file_iptm_asli')) {
             $file = $request->file('file_iptm_asli');
             $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
             $iptm_tumpangan->file_iptm_asli = $file->getClientOriginalName();
         }
-        if ($request->hasFile('file_sk_kematian_rumah_sakit')) {
-            $file = $request->file('file_sk_kematian_rumah_sakit');
-            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
-            $iptm_tumpangan->file_sk_kematian_rumah_sakit = $file->getClientOriginalName();
-        }
-        if ($request->hasFile('file_ktp_almarhum')) {
-            $file = $request->file('file_ktp_almarhum');
-            $file->move(public_path('/Document/Tumpangan'), $file->getClientOriginalName());
-            $iptm_tumpangan->file_ktp_almarhum = $file->getClientOriginalName();
 
-        }
         $iptm_tumpangan->save();
 
-        $randRegisNumber = 'TP00';
-        echo ++$randRegisNumber;
-        $registrasi = new nomorPemesanan();
-        $registrasi->tumpangan_id = $iptm_tumpangan->id;
-        $registrasi->Registrasi_number = $randRegisNumber;
-        $registrasi->Registrasi_Status = 'Waiting';
-
-        $registrasi->save();
-
-
-        return redirect('/viewSukses/' . $iptm_tumpangan->id)->with('register_success', 'Welcome');
+        return redirect('/IPTM/tumpangan/sukses/' . $iptm_tumpangan->id)->with('register_success', 'Welcome');
     }
 
     public function ShowFormTumpangan($pemakamanid)

@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('member123'),
                 'address' => 'Jln. H Rijin Depok',
                 'gender' => 'male',
-                'role' => 'Member',
+                'role' => 'member',
                 'kepala_pemakaman' => null,
                 'NIP_kepala_pemakaman' => null,
                 'pemakaman_id' => null

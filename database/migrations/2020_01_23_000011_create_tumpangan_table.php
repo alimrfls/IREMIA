@@ -16,26 +16,26 @@ class CreateTumpanganTable extends Migration
         Schema::create('tumpangan', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('iptm_lama_id')->unsigned();
-            $table->integer('iptm_penumpang_id')->unsigned();
+            $table->integer('pemohon_id')->unsigned();
+            $table->integer('almarhum_id')->unsigned();
+
+            $table->string('file_iptm_asli')->nullable();
 
             $table->string('nomor_surat')->nullable();
-            $table->string('tahun_surat')->nullable();
+            $table->date('tanggal_surat')->nullable();
 
-            $table->string('nomor_kehilangan_kepolisian');
-            $table->date('tanggal_kehilangan_kepolisian');
+            $table->string('nomor_sk_kehilangan_kepolisian');
+            $table->date('tanggal_sk_kehilangan_kepolisian');
+            $table->string('file_sk_kehilangan_kepolisian')->nullable();
 
-            /* ini buat siapa?
-             * $table->string('nomor_kartu_keluarga');
-             * $table->string('nama_kelurahan')->nullable();
-             * $table->string('nomor_surat_rtrw');
-             * $table->date('tanggal_surat_rtrw');
-             */
             $table->string('status')->nullable();
             $table->string('cetak_oleh')->nullable();
             $table->timestamps();
 
-            $table->foreign('iptm_lama_id')->references('id')->on('iptm');;
-            $table->foreign('iptm_penumpang_id')->references('id')->on('iptm');;
+            $table->foreign('iptm_lama_id')->references('id')->on('iptm');
+            $table->foreign('almarhum_id')->references('id')->on('almarhum');
+            $table->foreign('pemohon_id')->references('id')->on('users');
+
         });
     }
 

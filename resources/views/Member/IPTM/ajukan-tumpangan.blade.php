@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div id="detailIPTM" style="padding-top: 150px;padding-bottom: 100px; background-color: lightgrey" >
+    <div id="detailIPTM" style="display: none;padding-top: 150px;padding-bottom: 100px; background-color: lightgrey" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -48,6 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-4" id="prefillData">
+                    <h3>Informasi Makam Tumpangan</h3>
                     <div class="mt-10">
                         <label for="">Nomor IPTM Lama</label>
                         <input type="text" id="nomor_iptm" name="no_iptm" placeholder="Nomor IPTM"
@@ -98,35 +99,152 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <form id="formTumpangan" action="{{url('/IPTM/Tumpangan/submit')}}" method="post" enctype="multipart/form-data">
+                    <form id="formTumpangan" action="{{url('/IPTM/tumpangan/submit')}}" method="post" enctype="multipart/form-data">
 
                         {{csrf_field()}}
                         <input type="text" id="iptm_id" name="iptm_id" hidden>
 
                         <div class="formStep" >
                             <div class="step" data-step="1">
+                                <h3>Informasi Almarhum Baru</h3>
                                 <div class="mt-10">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <label for="">No Surat Kehilangan Kepolisian</label>
-                                            <input type="text" name="nomor_surat_kehilangan" placeholder="No Surat Kehilangan Kepolisian"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'No Surat Kehilangan Kepolisian'" required
+                                            <label for="">Nama Almarhum</label>
+                                            <input type="text" name="nama_almarhum" placeholder="Nama Almarhum"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nama Almarhum'" required
                                                    class="single-input-primary">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="">Tanggal Surat Kehilangan Kepolisian</label>
-                                            <input type="date" name="tanggal_surat_kehilangan" placeholder="Tanggal Surat Kehilangan Kepolisian"
-                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tanggal Surat Kehilangan Kepolisian'" required
+                                            <label for="">Tanggal Wafat</label>
+                                            <input type="date" name="tanggal_wafat" placeholder="Tanggal Wafat"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tanggal Wafat'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="">No KTP Almarhum</label>
+                                            <input type="text" name="nomor_ktp_almarhum" placeholder="Nomor KTP Almarhum"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nomor KTP Almarhum'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="">Foto KTP Almarhum (Fotocopy/Asli)</label>
+                                            <input type="file" name="file_ktp_almarhum" placeholder="Foto KTP Almarhum (Fotocopy/Asli)"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto KTP Almarhum (Fotocopy/Asli)'"
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="">No KK Almarhum</label>
+                                            <input type="text" name="nomor_kk_almarhum" placeholder="No KK Almarhum"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'No KK Almarhum'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="">Foto KK Almarhum (Fotocopy/Asli)</label>
+                                            <input type="file" name="file_kk_almarhum" placeholder="Foto KK Almarhum (Fotocopy/Asli)"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto KK Almarhum (Fotocopy/Asli)'"
                                                    class="single-input-primary">
                                         </div>
                                     </div>
                                 </div>
                                 <br>
-                                <div class="text-right">
-                                    <button class="boxed-btn3 nextStep" type="button">Selanjutnya</button>
+                                <br>
+                                <h3>Surat Keterangan & Lampiran</h3>
+
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="">Foto IPTM Asli</label>
+                                            <input type="file" name="file_iptm_asli" placeholder="Foto IPTM Asli"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto IPTM Asli'"
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">No Surat Keterangan Kepolisian</label>
+                                            <input type="text" name="nomor_kehilangan_kepolisian" placeholder="No Surat Kehilangan Kepolisian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'No Surat Kehilangan Kepolisian'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Tanggal Surat Keterangan</label>
+                                            <input type="date" name="tanggal_kehilangan_kepolisian" placeholder="Tanggal Surat Kehilangan Kepolisian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tanggal Surat Kehilangan Kepolisian'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Foto Surat Keterangan</label>
+                                            <input type="file" name="file_sk_kehilangan_kepolisian" placeholder="Foto Surat Kehilangan Kepolisian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto Surat Kehilangan Kepolisian'"
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">No Surat Pengantar RT/RW</label>
+                                            <input type="text" name="nomor_sp_rtrw" placeholder="No Surat Pengantar RT/RW"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'No Surat Pengantar RT/RW'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Tanggal Surat Pengantar</label>
+                                            <input type="date" name="tanggal_sp_rtrw" placeholder="Tanggal Surat Pengantar RT/RW"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tanggal Surat Pengantar RT/RW'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Foto Surat Pengantar</label>
+                                            <input type="file" name="file_sp_rtrw" placeholder="Foto Surat Pengantar"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto Surat Pengantar'"
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">No Surat Kematian</label>
+                                            <input type="text" name="nomor_sk_kematian_rs" placeholder="No Surat Kematian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'No Surat Kematian'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Tanggal Surat Kematian</label>
+                                            <input type="date" name="tanggal_sk_kematian_rs" placeholder="Tanggal Surat Kematian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tanggal Surat Kematian'" required
+                                                   class="single-input-primary">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Foto Surat Kematian</label>
+                                            <input type="file" name="file_sk_kematian_rs" placeholder="Foto Surat Kematian"
+                                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Foto Surat Kematian'"
+                                                   class="single-input-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="row">
+                                    <div class="text-right col-sm-12">
+                                        <button class="boxed-btn3 nextStep" type="button">Selanjutnya</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="step" data-step="2">
+                                <h3>Informasi Ahli Waris</h3>
                                 <div class="mt-10">
                                     <label for="">No KTP Ahli Waris</label>
                                     <input type="text" name="nomor_ktp_ahliwaris" placeholder="No KTP Ahli Waris"
@@ -201,8 +319,13 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="text-right">
-                                    <button class="boxed-btn3" id="SubmitAndSaveBtn" type="button">Ajukan Tumpangan</button>
+                                <div class="row">
+                                    <div class="text-left col-sm-6">
+                                        <button class="boxed-btn3 prevStep" type="button">Sebelumnya</button>
+                                    </div>
+                                    <div class="text-right col-sm-6">
+                                        <button class="boxed-btn3" id="SubmitAndSaveBtn" type="button">Ajukan Tumpangan</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -355,21 +478,44 @@
 
                     setTimeout(function(){
                         mainForm.children(".activeStep").hide();
-                        mainForm.children(".activeStep").removeClass("activeStep");
+                        mainForm.children(".activeStep").removeClass("activeStep fadeOutDown animated");
 
                         mainForm.children(".step").each(function(){
                             if($(this).attr("data-step") === nextStep.toString()){
                                 $(this).show();
-                                $(this).addClass("fadeInDown animated");
+                                $(this).addClass("activeStep fadeInDown animated");
                             }
                         });
-                    },1000)
+                    },800);
+
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#detailIPTM").offset().top
+                    }, 800);
                 }
 
             });
 
             $(".prevStep").click(function(){
+                var currentStep = mainForm.children(".activeStep").attr("data-step");
+                var prevStep = parseInt(currentStep)-1;
+                console.log(prevStep);
+                mainForm.children(".activeStep").addClass("fadeOutUp animated");
 
+                setTimeout(function(){
+                    mainForm.children(".activeStep").hide();
+                    mainForm.children(".activeStep").removeClass("activeStep fadeOutUp animated");
+
+                    mainForm.children(".step").each(function(){
+                        if($(this).attr("data-step") === prevStep.toString()){
+                            $(this).show();
+                            $(this).addClass("activeStep fadeInUp animated");
+                        }
+                    });
+                },800);
+
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $("#detailIPTM").offset().top
+                }, 800);
             });
         }
 

@@ -41,7 +41,6 @@ class PerpanjanganController extends Controller
             $perpanjangan->iptm_id = $id;
             $perpanjangan->nomor_surat = $randomId;
             $perpanjangan->tanggal_surat = now();
-            $perpanjangan->tahun_surat = intval(date("Y"));
             $perpanjangan->status = "approved";
             $perpanjangan->cetak_oleh = Auth::user()->id;
             $perpanjangan->save();
@@ -65,13 +64,14 @@ class PerpanjanganController extends Controller
 
             $perpanjangan = new Perpanjangan();
             $perpanjangan->iptm_id = $id;
+            $perpanjangan->ahli_waris_id = $ahliwaris->id;
+            $perpanjangan->pemohon_id = Auth::user()->id;
             $perpanjangan->nomor_surat_kehilangan = $request->nomor_surat_kehilangan;
             $perpanjangan->tanggal_surat_kehilangan = $request->tanggal_surat_kehilangan;
             $perpanjangan->tanggal_surat = now();
             $perpanjangan->nomor_surat = $randomId;
             $perpanjangan->tahun_surat = intval(date("Y"));
             $perpanjangan->status = "waiting";
-            $perpanjangan->ahli_waris_id = $ahliwaris->id;
             $perpanjangan->save();
 
             return redirect('/IPTM/perpanjangan/sukses/' . $perpanjangan->id)->with('register_success', 'Welcome');

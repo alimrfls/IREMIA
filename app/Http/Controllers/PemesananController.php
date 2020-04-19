@@ -19,13 +19,17 @@ class PemesananController extends Controller
         if($tipe_pesanan == "perpanjangan"){
             $output = DB::table('perpanjangan')
                 ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
                 ->where('perpanjangan.status', '=', 'waiting')
                 ->get();
 
         }else if($tipe_pesanan == "tumpangan"){
             $output = DB::table('tumpangan')
-                ->where('status', '=', 'waiting')
+                ->join('iptm', 'iptm.id', '=', 'tumpangan.iptm_lama_id')
+                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
+                ->join('almarhum', 'almarhum.iptm_id', '=', 'iptm.id')
+                ->where('tumpangan.status', '=', 'waiting')
                 ->get();
 
         }else if($tipe_pesanan == "pemindahan"){
