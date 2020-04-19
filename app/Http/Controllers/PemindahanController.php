@@ -27,7 +27,7 @@ class PemindahanController extends Controller
                 "cetakPemakamanName"=>$cetakPemakamanName,
             ]);
         }
-        return view ('member.IPTM.ajukan-pemindahan');
+        return view ('Member.IPTM.ajukan-pemindahan');
     }
 
     public function ShowRiwayatCetakIPTM(){

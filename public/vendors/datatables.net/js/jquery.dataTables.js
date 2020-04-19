@@ -9459,7 +9459,7 @@
 	 * Version string for plug-ins to check compatibility. Allowed format is
 	 * `a.b.c-d` where: a:int, b:int, c:int, d:string(dev|beta|alpha). `d` is used
 	 * only for non-release builds. See http://semver.org/ for more information.
-	 *  @member
+	 *  @Member
 	 *  @type string
 	 *  @default Version number
 	 */
@@ -9472,7 +9472,7 @@
 	 * Note that the `DataTable.settings` object is aliased to
 	 * `jQuery.fn.dataTableExt` through which it may be accessed and
 	 * manipulated, or `jQuery.fn.dataTable.settings`.
-	 *  @member
+	 *  @Member
 	 *  @type array
 	 *  @default []
 	 *  @private
@@ -10201,7 +10201,7 @@
 		 * define your columns, you must have an entry in the array for every single
 		 * column that you have in your table (these can be null if you don't which
 		 * to specify any options).
-		 *  @member
+		 *  @Member
 		 *
 		 *  @name DataTable.defaults.column
 		 */
@@ -10222,7 +10222,7 @@
 		 *     <li>a negative integer - column index counting from the right</li>
 		 *     <li>the string "_all" - all columns (i.e. assign a default)</li>
 		 *   </ul>
-		 *  @member
+		 *  @Member
 		 *
 		 *  @name DataTable.defaults.columnDefs
 		 */
@@ -10724,7 +10724,7 @@
 		 * rendered as "1,000,000") to help readability for the end user. This
 		 * function will override the default method DataTables uses.
 		 *  @type function
-		 *  @member
+		 *  @Member
 		 *  @param {int} toFormat number to be formatted
 		 *  @returns {string} formatted string for DataTables to show the number
 		 *
@@ -10900,7 +10900,7 @@
 		 * For example you could use POST data, or pull information from a Gears or
 		 * AIR database.
 		 *  @type function
-		 *  @member
+		 *  @Member
 		 *  @param {string} source HTTP source to obtain the data from (`ajax`)
 		 *  @param {array} data A key/value pair object containing the data to send
 		 *    to the server
@@ -10949,7 +10949,7 @@
 		 * state of a table is loaded. By default DataTables will load from `localStorage`
 		 * but you might wish to use a server-side database or cookies.
 		 *  @type function
-		 *  @member
+		 *  @Member
 		 *  @param {object} settings DataTables settings object
 		 *  @param {object} callback Callback that can be executed when done. It
 		 *    should be passed the loaded state object.
@@ -11052,7 +11052,7 @@
 		 * information for the table is stored By default DataTables will use `localStorage`
 		 * but you might wish to use a server-side database or cookies.
 		 *  @type function
-		 *  @member
+		 *  @Member
 		 *  @param {object} settings DataTables settings object
 		 *  @param {object} data The state object to be saved
 		 *

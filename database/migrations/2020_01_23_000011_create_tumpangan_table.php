@@ -30,7 +30,7 @@ class CreateTumpanganTable extends Migration
              * $table->string('nomor_surat_rtrw');
              * $table->date('tanggal_surat_rtrw');
              */
-
+            $table->string('status')->nullable();
             $table->string('cetak_oleh')->nullable();
             $table->timestamps();
 

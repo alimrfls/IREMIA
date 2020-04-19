@@ -29,6 +29,7 @@ class PemindahanTable extends Migration
             $table->string('nomor_kehilangan');
             $table->string('tanggal_kehilangan');
 
+            $table->string('status')->nullable();
             $table->string('ketersediaan_makam')->nullable();
             $table->string('cetak_oleh')->nullable();
             $table->timestamps();

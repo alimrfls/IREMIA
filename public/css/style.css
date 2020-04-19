@@ -1730,9 +1730,37 @@ h3 {
   }
 }
 
+.do-spin{
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */
+  /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+.wordwrap {
+  width: 450px;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+}
+
 /* line 1, ../../Arafath/CL/December/234. Finance/HTML/scss/_slider.scss */
 .slider_bg_1 {
-  background-image: url(/images/assets/banner/banner.png);
+  background-image: url(/images/assets/banner/burial.jpg);
 }
 
 /* line 4, ../../Arafath/CL/December/234. Finance/HTML/scss/_slider.scss */
@@ -2884,8 +2912,8 @@ input[type=checkbox] + label:active:before {
 
 /* line 32, ../../Arafath/CL/December/234. Finance/HTML/scss/_check.scss */
 input[type=checkbox]:checked + label:before {
-  background-color: #F91842;
-  border-color: #F91842;
+  background-color: #A5E9D5;
+  border-color: #A5E9D5;
   color: #fff;
 }
 
@@ -4890,7 +4918,7 @@ h6 {
   line-height: 40px;
   border: none;
   outline: none;
-  background: #f9f9ff;
+  background: whitesmoke;
   padding: 0 20px;
 }
 
@@ -4902,6 +4930,11 @@ h6 {
 /* line 528, ../../Arafath/CL/December/234. Finance/HTML/scss/_elements.scss */
 .input-group-icon {
   position: relative;
+}
+
+.radio-label {
+  margin-left: 15px;
+  margin-top: 5px;
 }
 
 /* line 530, ../../Arafath/CL/December/234. Finance/HTML/scss/_elements.scss */
@@ -5235,7 +5268,7 @@ h6 {
 
 /* line 798, ../../Arafath/CL/December/234. Finance/HTML/scss/_elements.scss */
 .primary-checkbox input:checked + label {
-  background: url(/images/assets/elements/primary-check.png) no-repeat center center/cover;
+  background-color: #20c997;
   border: none;
 }
 

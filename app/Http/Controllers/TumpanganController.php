@@ -110,7 +110,6 @@ class TumpanganController extends Controller
 
 
         return redirect('/viewSukses/' . $iptm_tumpangan->id)->with('register_success', 'Welcome');
-
     }
 
     public function ShowFormTumpangan($pemakamanid)
@@ -136,7 +135,7 @@ class TumpanganController extends Controller
                 "cetakPemakamanName" => $cetakPemakamanName,
             ]);
         }
-        return view ('member.IPTM.ajukan-tumpangan');
+        return view ('Member.IPTM.ajukan-tumpangan');
 
     }
 

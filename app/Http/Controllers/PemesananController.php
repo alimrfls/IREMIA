@@ -12,10 +12,31 @@ use Illuminate\Http\Request;
 
 class PemesananController extends Controller
 {
-    public function showStatusPemesanan(){
-        $nomorpemesanan = NomorPemesanan::all();
+    public function showStatusPemesanan($tipe_pesanan){
+
+        $output = null;
+
+        if($tipe_pesanan == "perpanjangan"){
+            $output = DB::table('perpanjangan')
+                ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
+                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+                ->where('perpanjangan.status', '=', 'waiting')
+                ->get();
+
+        }else if($tipe_pesanan == "tumpangan"){
+            $output = DB::table('tumpangan')
+                ->where('status', '=', 'waiting')
+                ->get();
+
+        }else if($tipe_pesanan == "pemindahan"){
+            $output = DB::table('pemindahan')
+                ->where('status', '=', 'waiting')
+                ->get();
+        }
+
         return view('Pemesanan.status-pemesanan')->with([
-            'statusPemesanan'=>$nomorpemesanan
+            "data" => $output,
+            "tipe" => $tipe_pesanan
         ]);
     }
 }

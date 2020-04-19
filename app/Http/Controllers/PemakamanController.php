@@ -177,6 +177,26 @@ class PemakamanController extends Controller
         return redirect('/')->with('register_success','Welcome,');
     }
 
+    public function SubmitEditPemakaman(Request $request, $id){
+
+        $file = $request->file('photo_pemakaman');
+        $file->move(public_path('/images/pemakaman'), $file->getClientOriginalName());
+
+        $pemakaman = Pemakaman::find($id);
+        $pemakaman->nama_pemakaman = $request['nama_pemakaman'];
+        $pemakaman->email_pemakaman = $request['email_pemakaman'];
+        $pemakaman->jumlah_pemakaman = $request['jumlah_pemakaman'];
+        $pemakaman->luas_pemakaman = $request['luas_pemakaman'];
+        $pemakaman->alamat_pemakaman = $request['alamat_pemakaman'];
+        $pemakaman->deskripsi_pemakaman = $request['deskripsi_pemakaman'];
+        $pemakaman->photo_pemakaman = $file->getClientOriginalName();
+
+        $pemakaman->save();
+
+
+        return redirect("/pemakaman");
+    }
+
     public function ShowAllPemakaman(){
         $pemakaman = Pemakaman::all();
         return view('Pemakaman.cari-Pemakaman')->with([

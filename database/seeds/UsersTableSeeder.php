@@ -38,10 +38,10 @@ class UsersTableSeeder extends Seeder
             [
                 'fullname' => 'Ilham Ridho A',
                 'email' => 'ridho@email.com',
-                'password' => bcrypt('member'),
+                'password' => bcrypt('member123'),
                 'address' => 'Jln. H Rijin Depok',
                 'gender' => 'male',
-                'role' => 'member',
+                'role' => 'Member',
                 'kepala_pemakaman' => null,
                 'NIP_kepala_pemakaman' => null,
                 'pemakaman_id' => null

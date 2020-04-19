@@ -48,15 +48,34 @@
                 <li class="sub-menu children">
                     <a href="/pemakaman/jadwal"> <i class="menu-icon fa fa-calendar"></i>Jadwal Pemakaman</a>
                 </li>
-                <li class="sub-menu children">
-                    <a href="/pemakaman/pesanan"> <i class="menu-icon fa fa-check"></i>Pemeriksaan Pemesanan</a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check"></i>Semua Permohonan</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li>
+                            <i class="fa fa-file-pdf-o"></i>
+                            <a href="/pemakaman/pesanan/perpanjangan">Perpanjangan</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-file-pdf-o"></i>
+                            <a href="/pemakaman/pesanan/tumpangan">Tumpangan</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-file-pdf-o"></i>
+                            <a href="/pemakaman/pesanan/pemindahan">Pemindahan</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-file"></i>
+                            <a href="/pemakaman/pesanan/riwayat">Riwayat</a>
+                        </li>
+                    </ul>
                 </li>
-                    <li class="sub-menu children">
+
+                <li class="sub-menu children">
                     <a href="/pemakaman/kelola"> <i class="menu-icon fa fa-gears"></i>Pengelolaan Makam</a>
                 </li>
 
 
-            @elseif(Auth::user()->role=='member')
+            @elseif(Auth::user()->role=='Member')
 
                 <li class="sub-menu children">
                     <a href="/pemakaman/cari"> <i class="menu-icon fa fa-file"></i>Pemesanan IPTM</a>

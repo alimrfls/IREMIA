@@ -143,8 +143,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="/pemakaman/edit/{{$tpu->pemakaman_id}}" method="POST" enctype="multipart/form-data">
+                                    <div class="modal-body">
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-4">
@@ -153,7 +153,7 @@
                                                 @else
                                                     <img src="/images/no-image-available.jpg" width="100%" alt="">
                                                 @endif
-                                                    <input type="file" class="form-control" >
+                                                    <input type="file" name="photo_pemakaman" class="form-control" >
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="form-group">
@@ -173,14 +173,14 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">Kapasitas Pemakaman</div>
-                                                        <input type="email" value="{{$tpu->jumlah_pemakaman}}" id="jumlah_pemakaman" name="jumlah_pemakaman" class="form-control">
+                                                        <input type="number" value="{{$tpu->jumlah_pemakaman}}" id="jumlah_pemakaman" name="jumlah_pemakaman" class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">Luas Pemakaman</div>
-                                                        <input type="email" value="{{$tpu->luas_pemakaman}}" id="luas_pemakaman" name="luas_pemakaman" class="form-control">
+                                                        <input type="number" value="{{$tpu->luas_pemakaman}}" id="luas_pemakaman" name="luas_pemakaman" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -197,12 +197,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

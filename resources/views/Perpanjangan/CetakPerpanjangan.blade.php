@@ -1,36 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-    <style>
-        .do-spin{
-            animation-name: spin;
-            animation-duration: 1000ms;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-            /* transform: rotate(3deg); */
-            /* transform: rotate(0.3rad);/ */
-            /* transform: rotate(3grad); */
-            /* transform: rotate(.03turn);  */
-        }
-
-        @keyframes spin {
-            from {
-                transform:rotate(0deg);
-            }
-            to {
-                transform:rotate(360deg);
-            }
-        }
-
-        .wordwrap {
-            width: 450px;
-            white-space: pre-wrap;      /* CSS3 */
-            white-space: -moz-pre-wrap; /* Firefox */
-            white-space: -o-pre-wrap;   /* Opera 7 */
-            word-wrap: break-word;      /* IE */
-        }
-    </style>
-
     <div class="sufee-login d-flex align-content-center flex-wrap" style="padding-top: 10px">
         <div class="container">
             <!-- The Modal -->

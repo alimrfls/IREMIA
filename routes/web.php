@@ -18,9 +18,17 @@ Route::get('/dashboard',    function(){
     return view('home');
 });
 
+Route::get('/logout', function(){
+    return redirect('/')->with(Auth::logout());
+});
+
+Route::get('/test', 'UserController@TestFunction');
+
+Route::post('/user/register', "UserController@register");
 
 Route::prefix('IPTM')->group(function () {
 
+    Route::get('/pesanan', 'IPTMController@ShowAllIPTM');
     Route::get('/buat-permohonan', 'IPTMController@ShowNewIPTMForm');
 
     //All IPTM
@@ -49,7 +57,8 @@ Route::prefix('IPTM')->group(function () {
 Route::prefix('pemakaman')->group(function () {
 
     Route::get('/','PemakamanController@ShowPemakaman');
-    Route::get('/pesanan','PemesananController@showStatusPemesanan');
+    Route::get('/pesanan/{tipe_pesanan}','PemesananController@showStatusPemesanan');
+
     Route::get('/pesanan/riwayat',function (){
         return view('Pemesanan.history-pemesanan');
     });
@@ -63,6 +72,8 @@ Route::prefix('pemakaman')->group(function () {
 
     Route::get('/cari','PemakamanController@ShowAllPemakaman');
     Route::get('/edit/{id}','PemakamanController@ShowDetailPemakamanByUser');
+
+    Route::post('/edit/{id}', 'PemakamanController@SubmitEditPemakaman');
 
 });
 
@@ -90,3 +101,4 @@ Route::get('/profile/edit',function (){
 });
 
 Route::get("/json/iptm", "IPTMController@RequestGetIPTM");
+Route::get("/json/iptm-by-no", "IPTMController@RequestGetIPTMByNo");

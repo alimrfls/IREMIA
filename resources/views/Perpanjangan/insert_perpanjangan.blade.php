@@ -14,7 +14,7 @@
                 @if(count($pemakamanname)>0)
                     @foreach($pemakamanname as $pemakamanName)
                         <div class="col-md-12">
-                            <form action="/izinPerpanjangan/{{$pemakamanName->pemakamanid}}" method="POST"
+                            <form action="/izinPerpanjangan/{{$pemakamanName->id}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <h3> IPTM Perpanjangan {{--{{$pemakamanName->namaPemakaman}}--}}</h3>

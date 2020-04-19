@@ -123,7 +123,7 @@ export default class Popper {
    * @private
    * @type {Object}
    * @deprecated since version 1.8
-   * @member Utils
+   * @Member Utils
    * @memberof Popper
    */
   static Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;

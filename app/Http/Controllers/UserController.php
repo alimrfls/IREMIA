@@ -28,21 +28,28 @@ class UserController extends Controller
 
     public function index()
     {
+        $pemakaman = Pemakaman::all();
         if(Auth::user()) {
             $role = Auth::user()->role;
             if ($role == "member") {
-                $pemakaman = Pemakaman::all();
 
-                return view('welcome')->with([
-                    'pemakaman' => $pemakaman
-                ]);
+                return view('welcome')->with(["pemakaman"=>$pemakaman]);
             } else {
                 return view('home');
             }
         }
-        return view('welcome');
+        return view('welcome')->with(["pemakaman"=>$pemakaman]);
     }
 
+    public function register(Request $request){
 
+        $user = new User();
+        $user->fullname = $request["fullname"];
+
+    }
+
+    public function TestFunction(){
+        return Hash::check("", Auth::user()->password, []);
+    }
 
 }

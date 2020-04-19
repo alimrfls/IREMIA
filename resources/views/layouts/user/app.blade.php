@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/nice-select.css">
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/gijgo.css">
-    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/slick.css">
     <link rel="stylesheet" href="/css/slicknav.css">
 
@@ -101,28 +101,35 @@
                                     @endif
                                     <li><a href="FAQ.html">FAQ</a></li>
                                     <li><a href="contact.html">Contact</a></li>
+                                    @if(Auth::user())
+                                        <li><a href="#">{{Auth::user()->fullname}}</a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <a href="{{url('/profile')}}">Profil Saya</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/logout">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li><a data-toggle="modal" data-target="#LoginModal" href="#">Masuk</a></li>
+                                        <li><a data-toggle="modal" data-target="#RegisterModal" href="#">Daftar</a></li>
+                                    @endif
                                 </ul>
 
                                 <nav></nav>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                            @if(\Illuminate\Support\Facades\Auth::user())
-                                <div class="Appointment">
-                                    <div class="d-none d-lg-block">
-                                        <a class="boxed-btn4" href="{{url('/profile')}}">{{\Illuminate\Support\Facades\Auth::user()->fullname}}</a>
-                                    </div>
+                            <div class="Appointment">
+                                <div class="phone_num d-none d-xl-block">
+                                    <a href="#"> <i class="fa fa-phone"></i> +10 673 567 367</a>
                                 </div>
-                            @else
-                                <div class="Appointment">
-                                    <div class="phone_num d-none d-xl-block">
-                                        <a href="#"> <i class="fa fa-phone"></i> +10 673 567 367</a>
-                                    </div>
-                                    <div class="d-none d-lg-block">
-                                        <a class="boxed-btn4" data-toggle="modal" data-target="#LoginModal" href="#">Login</a>
-                                    </div>
-                                </div>
-                            @endif
+                                {{--<div class="d-none d-lg-block">--}}
+                                    {{--<a class="boxed-btn4" data-toggle="modal" data-target="#LoginModal" href="#">Login</a>--}}
+                                {{--</div>--}}
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
@@ -159,6 +166,75 @@
                 <div class="modal-footer">
                     <button type="button" class="genric-btn danger radius" data-dismiss="modal">Close</button>
                     <button class="genric-btn success radius" type="submit">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RegisterModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="box-shadow: 0px 50px 90px 0 rgba(0, 0, 0, 0.2), 0px 0px 80px 90px rgba(0, 0, 0, 0.4);">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="RegisterModalLabel">Registrasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/register" method="POST" enctype="multipart/form-data">
+            @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="/images/no-image-available.jpg" width="100%" alt="">
+                            <input type="file" name="photo_pemakaman" class="form-control" >
+                        </div>
+                        <div class="col-sm-8">
+                            <div>
+                                <label for="">Nama Lengkap</label>
+                                <input type="text" name="fullname" placeholder="Masukan nama lengkap" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukan nama lengkap'" required class="single-input">
+                            </div>
+                            <div>
+                                <label for="">Jenis Kelamin</label>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="jenis_kelamin" value="male"> Laki-laki
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="jenis_kelamin" value="female">Perempuan
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="">Alamat Email</label>
+                                <input type="email" name="email" placeholder="Masukan email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukan email'" required class="single-input">
+                            </div>
+                            <div class="mt-10">
+                                <label for="">Password</label>
+                                <input type="password" name="password" placeholder="Masukan password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukan password'" required class="single-input">
+                            </div>
+                            <div class="mt-10">
+                                <label for="">Konfirmasi Password</label>
+                                <input type="password" name="password" placeholder="Ketik ulang password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ketik ulang password'" required class="single-input">
+                            </div>
+                            <div>
+                                <label for="">Alamat</label>
+                                <textarea name="" class="single-input" cols="30" rows="3" required></textarea>
+                            </div>
+                            <div class="switch-wrap d-flex">
+                                <div class="primary-checkbox">
+                                    <input type="checkbox" id="confirm-checkbox" required>
+                                    <label for="confirm-checkbox"></label>
+                                </div>
+                                <p class="radio-label">Saya menyetujui syarat dan ketentuan yang berlaku</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="genric-btn danger radius" data-dismiss="modal">Tutup</button>
+                    <button class="genric-btn success radius" type="submit">Daftar</button>
                 </div>
             </form>
         </div>

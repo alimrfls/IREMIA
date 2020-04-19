@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Validator;
 class IPTMController extends Controller
 {
 
+    public function ShowAllIPTM(){
+
+        if(Auth::user()->role == "member"){
+            return view('Member.IPTM.semua-iptm');
+        }
+
+        return redirect('/');
+    }
+
     public function ShowSuksesInput($inputType, $id)
     {
         $output = null;
@@ -31,7 +40,7 @@ class IPTMController extends Controller
                 ->where('tumpangan.id', '=', $id)
                 ->get();
         }else if($inputType == "pemindahan"){
-            $output = DB::table('ijinpemindahan')
+            $output = DB::table('pemindahan')
                 ->where('ijinpemindahan.pemindahanid', '=', $id)
                 ->get();
         }
@@ -51,24 +60,24 @@ class IPTMController extends Controller
         {
             $output = DB::table("perpanjangan")->where("perpanjangan.id", "=", $id)
                 ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
-                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+                ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
                 ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
         else if($inputType == "pemindahan")
         {
             $output = DB::table("pemindahan")->where("pemindahan.id", "=", $id)
                 ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
-                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
-                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
+                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+                ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get()
+                ->join('makam', 'makam.id', '=', 'almarhum.makam_id');
         }
         else if($inputType == "tumpangan")
         {
             $output = DB::table("tumpangan")->where("tumpangan.id", "=", $id)
                 ->join('iptm', 'iptm.id', '=', 'perpanjangan.iptm_id')
-                ->join('makam', 'makam.id', '=', 'iptm.makam_id')
-                ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+                ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+                ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
                 ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')->get();
         }
 
@@ -90,11 +99,10 @@ class IPTMController extends Controller
         ]);
     }
 
-
     public function ShowNewIPTMForm(){
         if(Auth::user()->role == "member"){
 
-            return view('member.buat-iptm');
+            return view('Member.buat-iptm');
 
         }else{
             return redirect('/');
@@ -112,8 +120,8 @@ class IPTMController extends Controller
         }
 
         $iptm = DB::table("iptm")
-            ->join('makam', 'makam.id', '=', 'iptm.makam_id')
-            ->join('almarhum', 'makam.almarhum_id', '=', 'almarhum.id')
+            ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+            ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
             ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
             ->where('iptm.nomor_iptm', "=", $noIptm)
             ->orWhere('almarhum.nama_almarhum', "=", $namaAlmarum)
@@ -121,4 +129,20 @@ class IPTMController extends Controller
 
         return json_encode($iptm);
     }
+
+    public function RequestGetIPTMByNo(Request $req){
+        $noIptm = "";
+        $noIptm = $req->query('noiptm');
+
+        $iptm = DB::table("iptm")
+            ->join('almarhum', 'iptm.almarhum_id', '=', 'almarhum.id')
+            ->join('ahli_waris', 'almarhum.ahli_waris_id', '=', 'ahli_waris.id')
+            ->join('makam', 'makam.id', '=', 'almarhum.makam_id')
+            ->join('pemakaman', 'pemakaman.id', '=', 'makam.pemakaman_id')
+            ->where('iptm.nomor_iptm', "=", $noIptm)
+            ->get();
+
+        return json_encode($iptm);
+    }
+
 }

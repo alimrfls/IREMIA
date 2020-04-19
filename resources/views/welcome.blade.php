@@ -10,16 +10,16 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".1s">Dinas Pemakaman Lorem ipsum dolor sit amet</h3>
+                            <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".1s">#LuluskanKami atau kami kubur dengan joget yang asik</h3>
 
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">
                                 @if(Auth::user())
                                     <a href="/pemakaman" class="boxed-btn3">Semua Pemakaman</a>
                                 @else
-                                    <a href="/register" class="boxed-btn3">Daftar</a>
+                                    <a href="/register" data-toggle="modal" data-target="#RegisterModal" class="boxed-btn3">Daftar</a>
+                                    <a href="#" data-toggle="modal" data-target="#LoginModal" class="boxed-btn4">Login</a>
                                 @endif
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6">

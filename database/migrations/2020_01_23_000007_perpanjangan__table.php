@@ -16,6 +16,7 @@ class PerpanjanganTable extends Migration
         Schema::create('perpanjangan', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('iptm_id')->unsigned();
+            $table->integer('ahli_waris_id')->unsigned();
 
             $table->string('nomor_surat_kehilangan');
             $table->date('tanggal_surat_kehilangan');
@@ -31,6 +32,8 @@ class PerpanjanganTable extends Migration
             $table->string('cetak_oleh')->nullable();
             $table->timestamps();
 
+            $table->foreign('iptm_id')->references('id')->on('iptm');
+            $table->foreign('ahli_waris_id')->references('id')->on('ahli_waris');
             //$table->string('nama_kelurahan')->nullable();
         });
     }
