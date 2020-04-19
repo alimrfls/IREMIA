@@ -23,7 +23,7 @@ class AhliWarisTable extends Migration
             $table->string('kelurahan_ahliwaris');
             $table->string('kecamatan_ahliwaris');
             $table->string('kota_ahliwaris');
-            $table->integer('telepon_ahliwaris');
+            $table->string('telepon_ahliwaris', 13);
             $table->string('hubungan_ahliWaris');
             $table->timestamps();
         });
